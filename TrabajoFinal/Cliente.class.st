@@ -14,18 +14,17 @@ Class {
 }
 
 { #category : #creation }
-Cliente class >> crearCon: apellido dni: undni ciudadResidencia: unaCiudad mail: unMail telefono: unTel preferencias: lasPref [
+Cliente class >> crear: unDni apellido: unApellido ciudadResidencia: unaCiudad mail: unMail telefono: unTel [ 
 
 	| nuevoCliente |
 	nuevoCliente := self new.
 	nuevoCliente
-		inicializar: apellido
-		dni: undni
+		inicializar: unDni
+		apellido: unApellido
 		ciudadResidencia: unaCiudad
 		mail: unMail
-		telefono: unTel
-		preferencias: lasPref .
-	^nuevoCliente
+		telefono: unTel.
+	^ nuevoCliente
 ]
 
 { #category : #accessing }

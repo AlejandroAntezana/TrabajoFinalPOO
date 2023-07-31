@@ -14,16 +14,16 @@ ViajeroFrecuente >> añadirMillas: millasAñadidas [
 ]
 
 { #category : #initialization }
-ViajeroFrecuente >> inicializar: unApellido dni: undni ciudadResidencia: unaCiudad mail: unMail telefono: unTel preferencias: lasPref [
+ViajeroFrecuente >> inicializar: unDni apellido: unApellido ciudadResidencia: unaCiudad mail: unMail telefono: unTel [
 
+	dni := unDni.
 	apellido := unApellido.
-	dni := undni.
 	ciudadResidencia := unaCiudad.
 	mail := unMail.
 	telefono := unTel.
+	preferencias := ''.
 	colContratos := OrderedCollection new.
 	millasAcumuladas := 0.
-	
 ]
 
 { #category : #accessing }
