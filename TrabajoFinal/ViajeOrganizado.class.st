@@ -76,6 +76,5 @@ ViajeOrganizado >> probando [
 
 	"scope: class-variables  &  instance-variables"
 
-	^'hola'
-	
+	^ 'hola ggato vaaasdasdas'
 ]
