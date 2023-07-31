@@ -29,11 +29,6 @@ Cliente class >> crearCon: apellido dni: undni ciudadResidencia: unaCiudad mail:
 ]
 
 { #category : #accessing }
-Cliente >> agregarContrato: unContrato [
- colContratos add: unContrato .
-]
-
-{ #category : #accessing }
 Cliente >> apellido [
 
 	^ apellido
@@ -70,13 +65,14 @@ Cliente >> dni: anObject [
 ]
 
 { #category : #initialization }
-Cliente >> inicializar: unApellido dni: undni ciudadResidencia: unaCiudad mail: unMail telefono: unTel preferencias: lasPref [
+Cliente >> inicializar: unDni apellido: unApellido ciudadResidencia: unaCiudad mail: unMail telefono: unTel [ 
 
+	dni := unDni.
 	apellido := unApellido.
-	dni := undni.
 	ciudadResidencia := unaCiudad.
 	mail := unMail.
 	telefono := unTel.
+	preferencias := ''.
 	colContratos := OrderedCollection new
 ]
 
@@ -118,6 +114,7 @@ Cliente >> telefono: anObject [
 
 { #category : #accessing }
 Cliente >> verContratosCliente [
+"Metodo que muestra por Transcript todos los contratos de un cliente"
 
 	colContratos do: [ :contrato | 
 		Transcript

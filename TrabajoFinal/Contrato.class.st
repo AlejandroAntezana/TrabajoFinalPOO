@@ -3,13 +3,18 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'numeroContrato',
+		'contratoEfectivizado',
 		'fechaContrato',
+		'costoTotal',
 		'viaje',
 		'fechaViaje',
 		'cantPersonas',
 		'cantCuotas',
 		'cantCuotasPagadas',
 		'fechaProximoVencimiento'
+	],
+	#classVars : [
+		'NUM_CONTRATO'
 	],
 	#category : #TrabajoFinal
 }
@@ -68,6 +73,30 @@ Contrato >> cantPersonas: anObject [
 ]
 
 { #category : #accessing }
+Contrato >> contratoEfectivizado [
+
+	^ contratoEfectivizado
+]
+
+{ #category : #accessing }
+Contrato >> contratoEfectivizado: anObject [
+
+	contratoEfectivizado := anObject
+]
+
+{ #category : #accessing }
+Contrato >> costoTotal [
+
+	^ costoTotal
+]
+
+{ #category : #accessing }
+Contrato >> costoTotal: anObject [
+
+	costoTotal := anObject
+]
+
+{ #category : #accessing }
 Contrato >> fechaContrato [
 
 	^ fechaContrato
@@ -104,16 +133,17 @@ Contrato >> fechaViaje: anObject [
 ]
 
 { #category : #initialization }
-Contrato >> inicializar: numContrato fechaContrato: unaFecha viaje: unaInstanciaViaje fechaViaje: fechaDelViaje cantPersonas: unNumero cantCuotas: unaCantidad cantCuotasPagadas: otraCantidad fechaProximoVencimiento: fechaVencimiento [
+Contrato >> inicializar: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [ 
 
-	numeroContrato := numContrato.
-	fechaContrato := unaFecha.
-	viaje := unaInstanciaViaje.
-	fechaViaje := fechaDelViaje.
-	cantPersonas := unNumero.
-	cantCuotas := unaCantidad.
-	cantCuotasPagadas := otraCantidad.
-	fechaProximoVencimiento := fechaVencimiento
+viaje := unViaje.
+fechaViaje := laFechaViaje .
+cantPersonas := laCantPersonas .
+cantCuotas := laCantCuotas .
+cantCuotasPagadas := 0.
+numeroContrato := NUM_CONTRATO.
+NUM_CONTRATO := NUM_CONTRATO + 1.
+fechaContrato := Date today.
+fechaProximoVencimiento := Date today + 30.
 ]
 
 { #category : #accessing }

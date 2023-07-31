@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'nombre',
 		'costoPersona',
-		'valorImpuestos'
+		'valorImpuestos',
+		'viajeDisponible'
 	],
 	#category : #TrabajoFinal
 }
@@ -38,9 +39,10 @@ Viaje >> costoPersona: unPrecio [
 { #category : #initialization }
 Viaje >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2 [
 
-nombre := nombreViaje.
-costoPersona := valor1.
-valorImpuestos := valor2.
+	nombre := nombreViaje.
+	costoPersona := valor1.
+	valorImpuestos := valor2.
+	viajeDisponible := true. 
 ]
 
 { #category : #accessing }
@@ -65,4 +67,16 @@ Viaje >> valorImpuestos [
 Viaje >> valorImpuestos: unValor [
 
 	valorImpuestos := unValor
+]
+
+{ #category : #accessing }
+Viaje >> viajeDisponible [
+
+	^ viajeDisponible
+]
+
+{ #category : #accessing }
+Viaje >> viajeDisponible: anObject [
+
+	viajeDisponible := anObject
 ]

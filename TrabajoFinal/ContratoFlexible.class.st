@@ -3,7 +3,7 @@ Class {
 	#superclass : #Contrato,
 	#instVars : [
 		'valorPlus',
-		'valorPlusAbonado',
+		'disponibilidadExcursiones',
 		'colExcursionesAdicionales'
 	],
 	#category : #TrabajoFinal
@@ -21,20 +21,16 @@ ContratoFlexible >> colExcursionesAdicionales: unaDupla [
 	colExcursionesAdicionales add: unaDupla 
 ]
 
-{ #category : #initialization }
-ContratoFlexible >> inicializar: numContrato fechaContrato: unaFecha viaje: unaInstanciaViaje fechaViaje: fechaDelViaje cantPersonas: unNumero cantCuotas: unaCantidad cantCuotasPagadas: otraCantidad fechaProximoVencimiento: fechaVencimiento [
+{ #category : #accessing }
+ContratoFlexible >> disponibilidadExcursiones [
 
-	numeroContrato := numContrato.
-	fechaContrato := unaFecha.
-	viaje := unaInstanciaViaje.
-	fechaViaje := fechaDelViaje.
-	cantPersonas := unNumero.
-	cantCuotas := unaCantidad.
-	cantCuotasPagadas := otraCantidad.
-	fechaProximoVencimiento := fechaVencimiento.
-	valorPlus := 0.
-	valorPlusAbonado := false.
-	colExcursionesAdicionales := OrderedCollection new.
+	^ disponibilidadExcursiones
+]
+
+{ #category : #accessing }
+ContratoFlexible >> disponibilidadExcursiones: anObject [
+
+	disponibilidadExcursiones := anObject
 ]
 
 { #category : #accessing }
@@ -47,16 +43,4 @@ ContratoFlexible >> valorPlus [
 ContratoFlexible >> valorPlus: anObject [
 
 	valorPlus := anObject
-]
-
-{ #category : #accessing }
-ContratoFlexible >> valorPlusAbonado [
-
-	^ valorPlusAbonado
-]
-
-{ #category : #accessing }
-ContratoFlexible >> valorPlusAbonado: anObject [
-
-	valorPlusAbonado := anObject
 ]
