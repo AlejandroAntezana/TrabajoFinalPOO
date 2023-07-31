@@ -25,11 +25,6 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 	^ nuevoViaje
 ]
 
-{ #category : #initialization }
-ViajeEspecial >> PruebaMetodo [
- ^ 'Luca cagon'
-]
-
 { #category : #accessing }
 ViajeEspecial >> ciudad [
 
