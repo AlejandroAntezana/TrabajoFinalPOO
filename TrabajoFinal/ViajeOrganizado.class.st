@@ -68,3 +68,14 @@ ViajeOrganizado >> obtenerFechasDeSalida [
 			show: entero printString;
 			cr ]
 ]
+
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> probando [
+
+	"comment stating purpose of instance-side method"
+
+	"scope: class-variables  &  instance-variables"
+
+	^'hola'
+	
+]
