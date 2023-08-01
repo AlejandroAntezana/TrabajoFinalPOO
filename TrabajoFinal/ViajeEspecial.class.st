@@ -101,6 +101,14 @@ ViajeEspecial >> toString [
 ]
 
 { #category : #propio }
+ViajeEspecial >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
+
+	^ [ self fechaSalida = laFechaViaje ] and: [ 
+		  self disponibilidad >= laCantPersonas and:
+			  self viajeDisponible ]
+]
+
+{ #category : #propio }
 ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 fecha2: fecha2 [
 
 	| rta |

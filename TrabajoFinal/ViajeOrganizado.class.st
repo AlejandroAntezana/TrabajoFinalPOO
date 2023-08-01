@@ -107,7 +107,19 @@ ViajeOrganizado >> toString [
 	          , 'dias de duracion del viaje: ' , diasDuracionViaje
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propio }
+ViajeOrganizado >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
+
+	| rta |
+	rta := false.
+	[ viajeDisponible ] ifTrue: [ 
+		rta := colFechasSalida detect: [ :cadaTupla | 
+			       cadaTupla x = laFechaViaje and:
+				       cadaTupla y >= laCantPersonas ] ].
+	^ rta
+]
+
+{ #category : #propios }
 ViajeOrganizado >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
 
 	| rta |

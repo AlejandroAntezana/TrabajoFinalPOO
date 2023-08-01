@@ -88,6 +88,12 @@ Viaje >> verificarAltaDeViaje [
 ]
 
 { #category : #propio }
+Viaje >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
+
+	^ SubclassResponsibility
+]
+
+{ #category : #propio }
 Viaje >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
 
 	^SubclassResponsibility 
