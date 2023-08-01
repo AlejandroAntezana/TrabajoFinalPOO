@@ -32,6 +32,7 @@ ViajeOrganizado class >> crearViajeOrganizado: nombreViaje costoPersona: valor1 
 		costoPersona: valor1
 		valorImpuestos: valor2
 		diasDuracionViaje: cantDias.
+		
 	^ nuevoViajeOrganizado
 ]
 
@@ -104,4 +105,15 @@ ViajeOrganizado >> toString [
 
 	cadena := cadena , 'cantidad de etapas: ' , colEtapas length
 	          , 'dias de duracion del viaje: ' , diasDuracionViaje
+]
+
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
+
+	| rta |
+	rta := false.
+	rta := colFechasSalida anySatisfy: [ :tupla | 
+		       tupla x <= fecha1 and: tupla x <= fecha2 and y >= 1 ].
+
+	^ rta
 ]

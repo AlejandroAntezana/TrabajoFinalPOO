@@ -18,16 +18,17 @@ nuevoViaje inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2.
 ^nuevoViaje
 ]
 
-{ #category : #testing }
-Viaje class >> isAbstract [
-		
-	^ self == Viaje
-]
-
 { #category : #accessing }
 Viaje >> costoPersona: unPrecio [
 
 	costoPersona := unPrecio.
+]
+
+{ #category : #propio }
+Viaje >> infoViajeSiDisponibleFecha1: fecha1 Fecha2: fecha2 [
+
+	^ (self verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2) 
+		  ifTrue: self toString
 ]
 
 { #category : #initialization }
@@ -78,6 +79,18 @@ Viaje >> toString [
 Viaje >> valorImpuestos: unValor [
 
 	valorImpuestos := unValor
+]
+
+{ #category : #propio }
+Viaje >> verificarAltaDeViaje [
+
+	^viajeDisponible = true.
+]
+
+{ #category : #propio }
+Viaje >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
+
+	^SubclassResponsibility 
 ]
 
 { #category : #accessing }

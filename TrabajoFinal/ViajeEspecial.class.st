@@ -15,10 +15,17 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 
 	| nuevoViaje |
 	nuevoViaje := self new.
-	
-	nuevoViaje inicializarViajeEspecial: nombreViaje   costoPersona:valor1  valorImpuestos:valor2  fechaSalida:fecha1  ciudad:ciudadDestino   fechaRegreso:fecha2  disponibilidad:100.
-	
-^nuevoViaje.
+
+	nuevoViaje
+		inicializarViajeEspecial: nombreViaje
+		costoPersona: valor1
+		valorImpuestos: valor2
+		fechaSalida: fecha1
+		ciudad: ciudadDestino
+		fechaRegreso: fecha2
+		disponibilidad: unEntero.
+
+	^ nuevoViaje
 ]
 
 { #category : #accessing }
@@ -93,7 +100,7 @@ ViajeEspecial >> toString [
 	^ cadena
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propio }
 ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 fecha2: fecha2 [
 
 	| rta |
