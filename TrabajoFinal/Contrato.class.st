@@ -13,27 +13,16 @@ Class {
 		'cantCuotasPagadas',
 		'fechaProximoVencimiento'
 	],
-	#classVars : [
-		'NUM_CONTRATO'
-	],
 	#category : #TrabajoFinal
 }
 
 { #category : #creation }
-Contrato class >> crear: numContrato fechaContrato: unaFecha viaje: unaInstanciaViaje fechaViaje: fechaDelViaje cantPersonas: unNumero cantCuotas: unaCantidad cantCuotasPagadas: otraCantidad fechaProximoVencimiento: fechaVencimiento [
+Contrato class >> crear: numContrato viaje: unViaje fechaViaje: laFechaDelViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [
 
 	| nuevoContrato |
 	nuevoContrato := self new.
-	nuevoContrato
-		inicializar: numContrato
-		fechaContrato: unaFecha
-		viaje: unaInstanciaViaje
-		fechaViaje: fechaDelViaje
-		cantPersonas: unNumero
-		cantCuotas: unaCantidad
-		cantCuotasPagadas: otraCantidad
-		fechaProximoVencimiento: fechaVencimiento.
-	^nuevoContrato
+	nuevoContrato inicializar: numContrato viaje: unViaje fechaViaje: laFechaDelViaje cantPersonas: laCantPersonas  cantCuotas: laCantCuotas.
+	^ nuevoContrato
 ]
 
 { #category : #accessing }
@@ -133,17 +122,17 @@ Contrato >> fechaViaje: anObject [
 ]
 
 { #category : #initialization }
-Contrato >> inicializar: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [ 
+Contrato >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [
 
-viaje := unViaje.
-fechaViaje := laFechaViaje .
-cantPersonas := laCantPersonas .
-cantCuotas := laCantCuotas .
-cantCuotasPagadas := 0.
-numeroContrato := NUM_CONTRATO.
-NUM_CONTRATO := NUM_CONTRATO + 1.
-fechaContrato := Date today.
-fechaProximoVencimiento := Date today + 30.
+	viaje := unViaje.
+	fechaViaje := laFechaViaje.
+	cantPersonas := laCantPersonas.
+	cantCuotas := laCantCuotas.
+	cantCuotasPagadas := 0.
+	numeroContrato := nroContrato.
+	fechaContrato := Date today.
+	fechaProximoVencimiento := Date today + 30.
+	costoTotal := (unViaje obtenerCostoPorPersona) * laCantPersonas + (unViaje obtenerValorImpuestos)
 ]
 
 { #category : #accessing }

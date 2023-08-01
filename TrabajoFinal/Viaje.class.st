@@ -25,12 +25,6 @@ Viaje class >> isAbstract [
 ]
 
 { #category : #accessing }
-Viaje >> costoPersona [
-
-	^ costoPersona
-]
-
-{ #category : #accessing }
 Viaje >> costoPersona: unPrecio [
 
 	costoPersona := unPrecio.
@@ -57,6 +51,18 @@ Viaje >> nombre: nombreViaje [
 	nombre := nombreViaje.
 ]
 
+{ #category : #accessing }
+Viaje >> obtenerCostoPorPersona [
+
+	^ costoPersona
+]
+
+{ #category : #accessing }
+Viaje >> obtenerValorImpuestos [
+
+	^ valorImpuestos
+]
+
 { #category : #printing }
 Viaje >> toString [
 
@@ -65,12 +71,6 @@ Viaje >> toString [
 	          + 'valor impuestos: ' + valorImpuestos.
 	
 	^cadena.
-]
-
-{ #category : #accessing }
-Viaje >> valorImpuestos [
-
-	^ valorImpuestos
 ]
 
 { #category : #accessing }
