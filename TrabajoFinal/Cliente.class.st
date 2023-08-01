@@ -44,6 +44,15 @@ Cliente >> añadirContrato: unContrato [
  colContratos add: unContrato .
 ]
 
+{ #category : #propios }
+Cliente >> buscarContrato: nroContrato [
+|unContrato|
+
+unContrato := colContratos detect: [ :contrato | contrato numeroContrato = nroContrato ].
+
+^unContrato .
+]
+
 { #category : #accessing }
 Cliente >> ciudadResidencia [
 
@@ -56,7 +65,7 @@ Cliente >> ciudadResidencia: anObject [
 	ciudadResidencia := anObject
 ]
 
-{ #category : #propio }
+{ #category : #propios }
 Cliente >> controlarVencimiento [
 
 	^ colContratos whileFalse: [:contrato | contrato esProximoAVencer]

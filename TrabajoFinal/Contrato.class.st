@@ -86,6 +86,16 @@ Contrato >> costoTotal: anObject [
 ]
 
 { #category : #propio }
+Contrato >> efectivizarContrato [
+
+	| fechaHoy |
+	fechaHoy := Date today.
+	[ cantCuotas = cantCuotasPagadas and: fechaHoy >= fechaViaje ] 
+		ifTrue: [ contratoEfectivizado := true ].
+	^ contratoEfectivizado
+]
+
+{ #category : #propio }
 Contrato >> esProximoAVencer [
 
 	| rta |
