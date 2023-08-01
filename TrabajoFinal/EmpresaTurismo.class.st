@@ -46,6 +46,28 @@ EmpresaTurismo >> buscarViajesDisponiblesFecha1: fecha1 Fecha2: fecha2 [
 				ifTrue: [ viajes := viajes , viaje toString ] ] ]
 ]
 
+{ #category : #propios }
+EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: elViaje cantidadPersonas: laCantPersonas cantidadCuotas: laCantCuotas fechaViaje: laFechaViaje pagaPlus: abonaPlus [
+
+	| unViaje unCliente |
+	unViaje := self buscarViaje: elViaje.
+
+	[ unViaje isNotNil ] ifTrue: [ 
+		[ 
+		unViaje
+			verificarDisponibilidad: laFechaViaje
+			cantidadPersonas: laCantPersonas ] ifTrue: [ 
+			unCliente := self buscarCliente: dniCliente.
+			[ unCliente isNotNil ] ifTrue: [ 
+				unCliente
+					generarContrato: numContrato
+					viaje: elViaje
+					fechaViaje: laFechaViaje
+					cantidadPersonas: laCantPersonas
+					cantCuotas: laCantCuotas
+					pagaPlus: abonaPlus ] ] ].
+]
+
 { #category : #'as yet unclassified' }
 EmpresaTurismo >> inicioDelDia [
 
