@@ -36,7 +36,15 @@ ContratoFlexible >> disponibilidadExcursiones: anObject [
 { #category : #initialization }
 ContratoFlexible >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [
 
-	super inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas 
+	super
+		inicializar: nroContrato
+		viaje: unViaje
+		fechaViaje: laFechaViaje
+		cantPersonas: laCantPersonas
+		cantCuotas: laCantCuotas .
+		valorPlus := costoTotal * 0.15.
+		disponibilidadExcursiones := cantPersonas - 1.
+	
 ]
 
 { #category : #accessing }
