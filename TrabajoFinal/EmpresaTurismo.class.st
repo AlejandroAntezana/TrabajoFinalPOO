@@ -16,7 +16,26 @@ nuevaEmpresa initialize.
 ^nuevaEmpresa .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
+EmpresaTurismo >> buscarCliente: dniCliente [
+
+	| unCliente |
+	unCliente := colClientes detect: [ :cliente | 
+		             cliente dni = dniCliente ].
+
+	^ unCliente
+]
+
+{ #category : #propios }
+EmpresaTurismo >> buscarViaje: nombreViaje [
+
+	| unViaje |
+	unViaje := colViajes detect: [ :viaje | viaje nombre = nombreViaje ].
+
+	^ unViaje
+]
+
+{ #category : #propios }
 EmpresaTurismo >> buscarViajesDisponiblesFecha1: fecha1 Fecha2: fecha2 [
 
 	| viajes |

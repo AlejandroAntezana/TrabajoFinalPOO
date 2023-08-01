@@ -40,6 +40,11 @@ Cliente >> apellido: anObject [
 ]
 
 { #category : #accessing }
+Cliente >> añadirContrato: unContrato [
+ colContratos add: unContrato .
+]
+
+{ #category : #accessing }
 Cliente >> ciudadResidencia [
 
 	^ ciudadResidencia
@@ -67,6 +72,29 @@ Cliente >> dni [
 Cliente >> dni: anObject [
 
 	dni := anObject
+]
+
+{ #category : #propios }
+Cliente >> generarContrato: numContrato viaje: unViaje fechaViaje: laFechaViaje cantidadPersonas: laCantPersonas cantCuotas: laCantCuotas pagaPlus: abonaPlus [
+
+	| contratoNuevo |
+	abonaPlus
+		ifFalse: [ 
+			contratoNuevo := Contrato
+				                 crear: numContrato
+				                 viaje: unViaje
+				                 fechaViaje: laFechaViaje
+				                 cantPersonas: laCantPersonas
+				                 cantCuotas: laCantCuotas ]
+		ifTrue: [ 
+			contratoNuevo := ContratoFlexible
+				                 crear: numContrato
+				                 viaje: unViaje
+				                 fechaViaje: laFechaViaje
+				                 cantPersonas: laCantPersonas
+				                 cantCuotas: laCantCuotas ].
+			
+		self añadirContrato: contratoNuevo.
 ]
 
 { #category : #initialization }
