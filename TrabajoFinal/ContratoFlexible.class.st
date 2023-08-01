@@ -47,6 +47,17 @@ ContratoFlexible >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaV
 	
 ]
 
+{ #category : #printing }
+ContratoFlexible >> toString [
+
+	| cadena |
+	cadena := super toString.
+	cadena := cadena , 'Valor del Plus:' + valorPlus
+	          + 'Disponibilidad para Excursiones:'
+	          + disponibilidadExcursiones + 'Excursiones Contratadas:'
+	          + colExcursionesAdicionales 
+]
+
 { #category : #accessing }
 ContratoFlexible >> valorPlus [
 

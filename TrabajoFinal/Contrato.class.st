@@ -85,6 +85,13 @@ Contrato >> costoTotal: anObject [
 	costoTotal := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Contrato >> debitarYActualizarCuotas: laCantCuotas [
+
+	(cantCuotasPagadas < cantCuotas) ifTrue:[ cantCuotasPagadas:= cantCuotasPagadas + laCantCuotas. 
+		(cantCuotasPagadas < cantCuotas) ifTrue: [ fechaProximoVencimiento := fechaProximoVencimiento + 30*laCantCuotas ]].
+]
+
 { #category : #propio }
 Contrato >> efectivizarContrato [
 
@@ -164,6 +171,39 @@ Contrato >> numeroContrato [
 Contrato >> numeroContrato: anObject [
 
 	numeroContrato := anObject
+]
+
+{ #category : #printing }
+Contrato >> toString [
+
+	^ 'Numero de Contrato:' , numeroContrato ,
+'Fecha de Contrato:' , fechaContrato , 
+'Costo Total:' , costoTotal , 
+'Fecha del Viaje:' , fechaViaje ,
+'Cantidad de Personas:' , cantPersonas ,
+'Cantidad de Cuotas: ' , cantCuotas , 
+'Cantidad de Cuotas Pagadas:' , cantCuotasPagadas , 
+'Fecha del proximo vencimiento:' , fechaProximoVencimiento 
+]
+
+{ #category : #'as yet unclassified' }
+Contrato >> verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: elNumContrato [
+
+	| rta |
+	rta := elNumContrato = numeroContrato.
+	(rta and: Date today <= fechaViaje - 7) ifTrue: [ 
+		self debitarYActualizarCuotas: laCantCuotas ].
+	
+	^rta.
+]
+
+{ #category : #printing }
+Contrato >> verificarYObtenerInfo [
+
+	| texto |
+	texto := ''.
+	contratoEfectivizado ifFalse: [ texto := self toString ].
+	^ texto
 ]
 
 { #category : #accessing }
