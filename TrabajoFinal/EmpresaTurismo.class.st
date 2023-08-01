@@ -47,6 +47,27 @@ EmpresaTurismo >> buscarViajesDisponiblesFecha1: fecha1 Fecha2: fecha2 [
 ]
 
 { #category : #propios }
+EmpresaTurismo >> cancelarContrato: dniCliente numeroContrato: numContrato [
+
+|unCliente montoDevolucion|
+
+unCliente := self buscarCliente: dniCliente.
+
+[ unCliente isNotNil ] ifTrue: [ montoDevolucion := unCliente verificarYCancelarContrato: numContrato  ].
+
+^montoDevolucion 
+]
+
+{ #category : #propios }
+EmpresaTurismo >> efectivizarContratoACliente: elDniCliente numeroContrato: nroContrato [
+|unCliente|
+unCliente := self buscarCliente: elDniCliente.
+
+[ unCliente isNotNil ] ifTrue: [ unCliente efectivizarContrato: nroContrato ].
+
+]
+
+{ #category : #propios }
 EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: elViaje cantidadPersonas: laCantPersonas cantidadCuotas: laCantCuotas fechaViaje: laFechaViaje pagaPlus: abonaPlus [
 
 	| unViaje unCliente |
@@ -68,7 +89,7 @@ EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: elV
 					pagaPlus: abonaPlus ] ] ].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 EmpresaTurismo >> inicioDelDia [
 
 	| colClientesRecordatorio |

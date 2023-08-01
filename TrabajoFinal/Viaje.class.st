@@ -18,6 +18,12 @@ nuevoViaje inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2.
 ^nuevoViaje
 ]
 
+{ #category : #propio }
+Viaje >> actualizarCantPersonas: laCantPersonas [
+
+^ SubclassResponsibility.
+]
+
 { #category : #accessing }
 Viaje >> costoPersona: unPrecio [
 
@@ -97,6 +103,22 @@ Viaje >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas 
 Viaje >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
 
 	^SubclassResponsibility 
+]
+
+{ #category : #propio }
+Viaje >> verificarDisponibilidadYActualizarPersonas: fechaViaje disponibilidadNecesaria: disponibilidadNecesaria cantidadPersonas: laCantPersonas [
+
+	| cantPersonasModificada |
+	cantPersonasModificada := false.
+
+	[ 
+	self
+		verificarDisponibilidad: fechaViaje
+		cantidadPersonas: disponibilidadNecesaria ] ifTrue: [ 
+		(self actualizarCantPersonas: laCantPersonas) ifTrue: [ 
+			cantPersonasModificada := true ] ].
+
+	^ cantPersonasModificada
 ]
 
 { #category : #accessing }

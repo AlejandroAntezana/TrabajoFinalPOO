@@ -28,6 +28,12 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 	^ nuevoViaje
 ]
 
+{ #category : #propio }
+ViajeEspecial >> actualizarCantPersonas: laCantPersonas [
+
+	self disponibilidad: disponibilidad + laCantPersonas.
+]
+
 { #category : #accessing }
 ViajeEspecial >> ciudad [
 

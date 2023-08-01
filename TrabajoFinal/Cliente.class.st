@@ -84,6 +84,26 @@ Cliente >> dni: anObject [
 ]
 
 { #category : #propios }
+Cliente >> efectivizarContrato: nroContrato [
+|unContrato efectivizado|
+efectivizado := false.
+unContrato := self buscarContrato: nroContrato.
+[unContrato isNotNil ] ifTrue: [ (unContrato efectivizarContrato) ifTrue: [ efectivizado := true ] ].
+^ efectivizado
+]
+
+{ #category : #propios }
+Cliente >> eliminarContrato: numContrato [
+
+|unContrato|
+
+unContrato := self buscarContrato: numContrato.
+
+colContratos remove: unContrato.
+
+]
+
+{ #category : #propios }
 Cliente >> generarContrato: numContrato viaje: unViaje fechaViaje: laFechaViaje cantidadPersonas: laCantPersonas cantCuotas: laCantCuotas pagaPlus: abonaPlus [
 
 	| contratoNuevo |
@@ -130,7 +150,7 @@ Cliente >> mail: anObject [
 	mail := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 Cliente >> obtenerContratosSinEfectivizar [
 
 	"comment stating purpose of instance-side method"
@@ -180,11 +200,23 @@ Cliente >> verContratosCliente [
 			cr ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 Cliente >> verificarContratoClienteYPagarLaCantCuotas: laCantCuotas NumeroContrato: elNumeroContrato [
 
 	^ colContratos whileFalse: [ :contrato | 
 		contrato
 			verificarContratoYPagarCantCuotas: laCantCuotas
 			NumContrato: elNumeroContrato ]
+]
+
+{ #category : #propios }
+Cliente >> verificarYCancelarContrato: numContrato [
+
+|unContrato montoDevolucion|
+
+unContrato := self buscarContrato: numContrato.
+
+[ unContrato isNotNil ] ifTrue: [ montoDevolucion := unContrato calcularDevolucion. self eliminarContrato: numContrato ].
+
+^montoDevolucion 
 ]

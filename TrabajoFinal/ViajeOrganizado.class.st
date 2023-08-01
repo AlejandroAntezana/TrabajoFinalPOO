@@ -107,7 +107,7 @@ ViajeOrganizado >> toString [
 	          , 'dias de duracion del viaje: ' , diasDuracionViaje
 ]
 
-{ #category : #propio }
+{ #category : #propios }
 ViajeOrganizado >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
 
 	| rta |
@@ -128,4 +128,27 @@ ViajeOrganizado >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
 		       tupla x <= fecha1 and: tupla x <= fecha2 and y >= 1 ].
 
 	^ rta
+]
+
+{ #category : #propios }
+ViajeOrganizado >> verificarDisponibilidadYActualizar: fechaViaje fechaNueva: nuevaFecha cantidadPersonas: cantPersonas [
+
+	| fechaNuevaEncontrada fechaAnteriorEncontrada fechaNuevaDisponible |
+	fechaNuevaEncontrada := false.
+	fechaAnteriorEncontrada := false.
+	fechaNuevaDisponible := false.
+
+	colFechasSalida do: [ :cadaTupla | 
+		[ cadaTupla x = nuevaFecha ] ifTrue: [ 
+			fechaNuevaEncontrada := true.
+			[ cadaTupla y >= cantPersonas ] ifTrue: [ 
+				fechaNuevaDisponible := true.
+				cadaTupla y: cadaTupla y - cantPersonas ] ] ].
+	
+	fechaNuevaDisponible ifTrue: [ 
+		fechaAnteriorEncontrada whileFalse: [ 
+			colFechasSalida do: [ :cadaTupla | 
+				cadaTupla x = fechaViaje ifTrue: [ 
+					fechaAnteriorEncontrada := true.
+					cadaTupla y: cadaTupla y + cantPersonas ] ] ] ]
 ]

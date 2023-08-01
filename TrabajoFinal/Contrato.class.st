@@ -25,6 +25,24 @@ Contrato class >> crear: numContrato viaje: unViaje fechaViaje: laFechaDelViaje 
 	^ nuevoContrato
 ]
 
+{ #category : #propio }
+Contrato >> calcularDevolucion [
+
+	| monto montoActualAbonado fechaHoy |
+	monto := 0.
+	montoActualAbonado := costoTotal / cantCuotas * cantCuotasPagadas.
+	fechaHoy := Date today.
+
+	[ fechaHoy <= fechaViaje - 90 ] ifTrue: [ 
+		monto := montoActualAbonado * 0.75 ].
+	[ fechaHoy >= fechaViaje - 90 and: fechaHoy <= fechaViaje - 60 ] 
+		ifTrue: [ monto := montoActualAbonado * 0.5 ].
+	[ fechaHoy >= fechaViaje - 60 ] ifTrue: [ 
+		monto := montoActualAbonado * 0.25 ].
+
+	^ monto
+]
+
 { #category : #accessing }
 Contrato >> cantCuotas [
 
@@ -85,7 +103,7 @@ Contrato >> costoTotal: anObject [
 	costoTotal := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propio }
 Contrato >> debitarYActualizarCuotas: laCantCuotas [
 
 	(cantCuotasPagadas < cantCuotas) ifTrue:[ cantCuotasPagadas:= cantCuotasPagadas + laCantCuotas. 
@@ -161,6 +179,22 @@ Contrato >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje can
 	costoTotal := (unViaje obtenerCostoPorPersona) * laCantPersonas + (unViaje obtenerValorImpuestos)
 ]
 
+{ #category : #propio }
+Contrato >> modificarPersonasContrato: laCantPersonas [
+
+	| disponibilidadNecesaria |
+	disponibilidadNecesaria := laCantPersonas - cantPersonas.
+
+	[ 
+	viaje
+		verificarDisponibilidadYActualizarPersonas: fechaViaje
+		disponibilidadNecesaria: disponibilidadNecesaria
+		cantidadPersonas: laCantPersonas ] ifTrue: [ 
+		viaje costoTotal: viaje obtenerCostoPorPersona * laCantPersonas
+			+ viaje obtenerValorImpuestos.
+		self cantPersonas: laCantPersonas ]
+]
+
 { #category : #accessing }
 Contrato >> numeroContrato [
 
@@ -186,7 +220,7 @@ Contrato >> toString [
 'Fecha del proximo vencimiento:' , fechaProximoVencimiento 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propio }
 Contrato >> verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: elNumContrato [
 
 	| rta |

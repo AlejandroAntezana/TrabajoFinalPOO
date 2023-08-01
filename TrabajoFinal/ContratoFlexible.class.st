@@ -47,6 +47,11 @@ ContratoFlexible >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaV
 	
 ]
 
+{ #category : #propios }
+ContratoFlexible >> modificarFechaViajeContrato: nuevaFecha [
+ viaje verificarDisponibilidadYActualizar: fechaViaje fechaNueva: nuevaFecha cantidadPersonas: cantPersonas.
+]
+
 { #category : #printing }
 ContratoFlexible >> toString [
 
