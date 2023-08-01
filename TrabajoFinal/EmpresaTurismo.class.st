@@ -22,8 +22,8 @@ EmpresaTurismo >> buscarCliente: dniCliente [
 	| unCliente |
 	unCliente := colClientes detect: [ :cliente | 
 		             cliente dni = dniCliente ].
-
-	^ unCliente
+	
+	^unCliente.
 ]
 
 { #category : #propios }
@@ -59,4 +59,9 @@ EmpresaTurismo >> inicioDelDia [
 EmpresaTurismo >> initialize [ 
 	colClientes := OrderedCollection new.
 	colViajes := OrderedCollection new.
+]
+
+{ #category : #propios }
+EmpresaTurismo >> pagarCuotasContratoCantCuotas: laCantCuotas NumContrato:numContrato DniCliente: dniCliente [
+	(self buscarCliente: dniCliente) ifNotNil: [(self buscarCliente: dniCliente) verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: numContrato].
 ]

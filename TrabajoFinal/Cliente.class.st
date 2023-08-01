@@ -121,6 +121,22 @@ Cliente >> mail: anObject [
 	mail := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Cliente >> obtenerContratosSinEfectivizar [
+
+	"comment stating purpose of instance-side method"
+
+	"scope: class-variables  &  instance-variables"
+
+	| infoContrato |
+	colContratos do: [ 
+		[ :contrato | 
+		contrato verificarYObtenerInfo = '' ifFalse: [ 
+			infoContrato := infoContrato , contrato verificarYObtenerInfo ] ] ].
+
+^infoContrato.
+]
+
 { #category : #accessing }
 Cliente >> preferencias [
 
@@ -153,4 +169,13 @@ Cliente >> verContratosCliente [
 		Transcript
 			show: contrato toString;
 			cr ]
+]
+
+{ #category : #'as yet unclassified' }
+Cliente >> verificarContratoClienteYPagarLaCantCuotas: laCantCuotas NumeroContrato: elNumeroContrato [
+
+	^ colContratos whileFalse: [ :contrato | 
+		contrato
+			verificarContratoYPagarCantCuotas: laCantCuotas
+			NumContrato: elNumeroContrato ]
 ]
