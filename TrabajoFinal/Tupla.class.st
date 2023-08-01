@@ -29,3 +29,27 @@ Tupla >> inicializarTuplaX: valorX Y: valorY [
 	
 	
 ]
+
+{ #category : #accessing }
+Tupla >> x [
+
+	^ x
+]
+
+{ #category : #accessing }
+Tupla >> x: anObject [
+
+	x := anObject
+]
+
+{ #category : #accessing }
+Tupla >> y [
+
+	^ y
+]
+
+{ #category : #accessing }
+Tupla >> y: anObject [
+
+	y := anObject
+]

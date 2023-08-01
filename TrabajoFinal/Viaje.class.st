@@ -67,10 +67,11 @@ Viaje >> obtenerValorImpuestos [
 Viaje >> toString [
 
 	| cadena |
-	cadena := 'nombre: ' + nombre + 'costo por persona: ' + costoPersona
-	          + 'valor impuestos: ' + valorImpuestos.
-	
-	^cadena.
+	cadena := 'nombre: ' , nombre , 'costo por persona: '
+	          , costoPersona toString , 'valor impuestos: '
+	          , valorImpuestos toString.
+
+	^ cadena
 ]
 
 { #category : #accessing }

@@ -14,15 +14,11 @@ Class {
 ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: valor2 fechaSalida: fecha1 ciudad: ciudadDestino fechaRegreso: fecha2 disponibilidad: unEntero [
 
 	| nuevoViaje |
-	nuevoViaje := self
-		              crear: nombreViaje
-		              costoPersona: valor1
-		              valorImpuestos: valor2.
-	nuevoViaje
-		inicializar: nombreViaje
-		costoPersona: valor1
-		valorImpuestos: valor2.
-	^ nuevoViaje
+	nuevoViaje := self new.
+	
+	nuevoViaje inicializarViajeEspecial: nombreViaje   costoPersona:valor1  valorImpuestos:valor2  fechaSalida:fecha1  ciudad:ciudadDestino   fechaRegreso:fecha2  disponibilidad:100.
+	
+^nuevoViaje.
 ]
 
 { #category : #accessing }
@@ -74,15 +70,17 @@ ViajeEspecial >> fechaSalida: anObject [
 ]
 
 { #category : #initialization }
-ViajeEspecial >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2 fechaSalida: fecha1 ciudad: ciudadDestino fechaRegreso: fecha2 disponibilidad: unEntero [
+ViajeEspecial >> inicializarViajeEspecial: nombreViaje costoPersona: valor1 valorImpuestos: valor2 fechaSalida: fecha1 ciudad: ciudadDestino fechaRegreso: fecha2 disponibilidad: unEntero [
 
-	nombre := nombreViaje.
-	costoPersona := valor1.
-	valorImpuestos := valor2.
+	self
+		inicializar: nombreViaje
+		costoPersona: valor1
+		valorImpuestos: valor2.
+
 	fechaSalida := fecha1.
 	ciudad := ciudadDestino.
 	fechaRegreso := fecha2.
-	disponibilidad := unEntero .
+	disponibilidad := unEntero
 ]
 
 { #category : #printing }
@@ -90,8 +88,17 @@ ViajeEspecial >> toString [
 
 	| cadena |
 	cadena := super toString.
-	cadena := cadena + ' fecha salida: ' + fechaSalida + ', ciudad: '
-	          + ciudad + ', cantidad de pasajeros disponible: '
-	          + disponibilidad + '.'.
-	^cadena.
+	cadena := cadena , ciudad , fechaSalida toString
+	          , fechaRegreso toString , disponibilidad toString.
+	^ cadena
+]
+
+{ #category : #'as yet unclassified' }
+ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 fecha2: fecha2 [
+
+	| rta |
+	rta := fecha1 <= fechaSalida and fechaSalida
+	       <= fecha2 and disponibilidad >= 1.
+
+	^ rta.
 ]

@@ -22,6 +22,19 @@ ViajeOrganizado class >> crear: nombreViaje costoPersona: valor1 valorImpuestos:
 	^ nuevoViajeOrganizado
 ]
 
+{ #category : #creation }
+ViajeOrganizado class >> crearViajeOrganizado: nombreViaje costoPersona: valor1 valorImpuestos: valor2 diasDuracionViaje: cantDias [
+
+	| nuevoViajeOrganizado |
+	nuevoViajeOrganizado := self new.
+	nuevoViajeOrganizado
+		inicializar: nombreViaje
+		costoPersona: valor1
+		valorImpuestos: valor2
+		diasDuracionViaje: cantDias.
+	^ nuevoViajeOrganizado
+]
+
 { #category : #accessing }
 ViajeOrganizado >> agregarFechaSalida: instanciaDate con: unEntero [
 
@@ -53,6 +66,17 @@ ViajeOrganizado >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos:
 	colFechasSalida := OrderedCollection new.
 ]
 
+{ #category : #initialization }
+ViajeOrganizado >> inicializarViajeOrganizado: nombreViaje costoPersona: valor1 valorImpuestos: valor2 diasDuracionViaje: cantDias [
+
+	nombre := nombreViaje.
+	costoPersona := valor1.
+	valorImpuestos := valor2.
+	diasDuracionViaje := cantDias.
+	colEtapas := OrderedCollection new.
+	colFechasSalida := OrderedCollection new
+]
+
 { #category : #accessing }
 ViajeOrganizado >> obtenerFechasDeSalida [
 
@@ -71,11 +95,13 @@ ViajeOrganizado >> obtenerFechasDeSalida [
 { #category : #printing }
 ViajeOrganizado >> toString [
 
-	|cadena|
+	| cadena |
 	cadena := super toString.
-	
-	cadena := cadena + 'fechas de salida disponibles: ' +
-	
-	colFechasSalida.
-	
+
+	cadena := cadena , 'fechas de salida disponibles: '
+	          , [ colFechasSalida select: [ :tupla | tupla y >= 1 ] ] 
+		          do: [ :x | x ] toString.
+
+	cadena := cadena , 'cantidad de etapas: ' , colEtapas length
+	          , 'dias de duracion del viaje: ' , diasDuracionViaje
 ]
