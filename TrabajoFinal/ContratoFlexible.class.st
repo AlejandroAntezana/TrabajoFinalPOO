@@ -33,6 +33,12 @@ ContratoFlexible >> disponibilidadExcursiones: anObject [
 	disponibilidadExcursiones := anObject
 ]
 
+{ #category : #initialization }
+ContratoFlexible >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [
+
+	super inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas 
+]
+
 { #category : #accessing }
 ContratoFlexible >> valorPlus [
 
