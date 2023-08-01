@@ -36,12 +36,23 @@ ViajeOrganizado class >> crearViajeOrganizado: nombreViaje costoPersona: valor1 
 	^ nuevoViajeOrganizado
 ]
 
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> actualizarCantPersonas: disponibilidadNecesaria FechaViaje: fechaViaje [
+	colFechasSalida do: [ :cadaTupla| (cadaTupla x = fechaViaje) ifTrue: [cadaTupla y: cadaTupla y +disponibilidadNecesaria ]]
+]
+
 { #category : #accessing }
 ViajeOrganizado >> agregarFechaSalida: instanciaDate con: unEntero [
 
 	| dupla |
 	dupla := instanciaDate -> unEntero. "Crea una dupla con la fecha y el entero"
 	colFechasSalida add: dupla
+]
+
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> cambiarViajeANoDisponible [
+
+	colFechasSalida lastPosition: [ :cadaTupla | cadaTupla x <= Date today ifTrue: [viajeDisponible := false]]
 ]
 
 { #category : #accessing }
@@ -91,6 +102,12 @@ ViajeOrganizado >> obtenerFechasDeSalida [
 			show: ', Entero: ';
 			show: entero printString;
 			cr ]
+]
+
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> quitarEtapa: laEtapa [
+	
+	colEtapas remove: laEtapa.
 ]
 
 { #category : #printing }

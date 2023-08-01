@@ -28,6 +28,26 @@ EmpresaTurismo >> agregarExcursionAContrato: dniCliente numeroContrato: nroContr
 			cantidadPersonasExcursion: cantPersonasExcursion ]
 ]
 
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> altaViajeEspecial: unNombre CostoPersona: unCostoPersona ValorImpuestos: elValorImpuestos FechaSalida: laFechaSalida FechaRegreso: laFechaRegreso Ciudad: laCiudad Disponibilidad: laDisponibilidad [
+
+	| unViaje |
+	unViaje := self buscarViaje: unNombre.
+
+	unViaje ifNil: [colViajes add:[ViajeEspecial crear: unNombre  costoPersona: unCostoPersona   valorImpuestos: elValorImpuestos  fechaSalida:  laFechaSalida  ciudad:laCiudad  fechaRegreso: laFechaRegreso   disponibilidad: laDisponibilidad]]
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> altaViajeOrganizado: unNombre CostoPersona: unCostoPersona ValorImpuesto: elValorImpuestos DuracionViaje: losDiasDuracionViaje [
+
+	| unViaje |
+	unViaje := self buscarViaje: unNombre.
+
+	unViaje ifNil: [ 
+		colViajes add: [ 
+			ViajeOrganizado crearViajeOrganizado: unNombre costoPersona: unCostoPersona valorImpuestos: elValorImpuestos  diasDuracionViaje: losDiasDuracionViaje  ] ]
+]
+
 { #category : #propios }
 EmpresaTurismo >> buscarCliente: dniCliente [
 
@@ -116,7 +136,71 @@ EmpresaTurismo >> initialize [
 	colViajes := OrderedCollection new.
 ]
 
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarCiudad: elViaje nuevaCiudad: laNuevaCiudad [
+	
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje ciudad: laNuevaCiudad ]
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarCostoViaje: elViaje nuevoCosto: elNuevoCosto [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje costoPersona: elNuevoCosto]
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarDisponibilidad: elViaje cupoNuevo: elNuevoCupo [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje disponibilidad: elNuevoCupo ]
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarFechaRegreso: elViaje nuevaFechaRegreso: laNuevaFechaRegreso [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje fechaRegreso: laNuevaFechaRegreso ]
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarFechaSalida: elViaje nuevoFechaSalida: laNuevaFechaSalida [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje fechaSalida: laNuevaFechaSalida].
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarImpuestosViaje: elViaje nuevoImpuesto: elNuevoImpuesto [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje valorImpuestos: elNuevoImpuesto ]
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> modificarNombreViaje: elViaje nuevoNombre: elNuevoNombre [
+
+	|unViaje|
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje nombre: elNuevoNombre ]. 
+]
+
 { #category : #propios }
 EmpresaTurismo >> pagarCuotasContratoCantCuotas: laCantCuotas NumContrato:numContrato DniCliente: dniCliente [
 	(self buscarCliente: dniCliente) ifNotNil: [(self buscarCliente: dniCliente) verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: numContrato].
+]
+
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> quitarEtapa: elViaje laEtapa: laEtapa [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje quitarEtapa: laEtapa ]
 ]

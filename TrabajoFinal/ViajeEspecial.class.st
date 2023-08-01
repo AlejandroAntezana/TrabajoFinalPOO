@@ -29,9 +29,14 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 ]
 
 { #category : #propio }
-ViajeEspecial >> actualizarCantPersonas: laCantPersonas [
+ViajeEspecial >> actualizarCantPersonas: disponibilidadNecesaria [
 
-	self disponibilidad: disponibilidad + laCantPersonas.
+	self disponibilidad: disponibilidad + disponibilidadNecesaria
+]
+
+{ #category : #'as yet unclassified' }
+ViajeEspecial >> cambiarViajeANoDisponible [
+	(Date today >= fechaSalida) ifTrue: [ viajeDisponible := false].
 ]
 
 { #category : #accessing }
