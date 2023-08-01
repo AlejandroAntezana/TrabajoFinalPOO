@@ -85,6 +85,15 @@ Contrato >> costoTotal: anObject [
 	costoTotal := anObject
 ]
 
+{ #category : #propio }
+Contrato >> esProximoAVencer [
+
+	| rta |
+	rta := false.
+	contratoEfectivizado ifFalse: [rta := Date today >= (fechaViaje-21) and: Date today <= (fechaViaje -7 )].
+	^rta.
+]
+
 { #category : #accessing }
 Contrato >> fechaContrato [
 

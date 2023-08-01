@@ -27,6 +27,15 @@ EmpresaTurismo >> buscarViajesDisponiblesFecha1: fecha1 Fecha2: fecha2 [
 				ifTrue: [ viajes := viajes , viaje toString ] ] ]
 ]
 
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> inicioDelDia [
+
+	| colClientesRecordatorio |
+	colClientesRecordatorio := OrderedCollection new.
+	colClientesRecordatorio := colClientes select: [ :cliente | 
+		                           cliente controlarVencimiento ]
+]
+
 { #category : #initialization }
 EmpresaTurismo >> initialize [ 
 	colClientes := OrderedCollection new.
