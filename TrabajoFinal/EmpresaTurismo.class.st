@@ -17,6 +17,18 @@ nuevaEmpresa initialize.
 ]
 
 { #category : #propios }
+EmpresaTurismo >> agregarExcursionAContrato: dniCliente numeroContrato: nroContrato excursion: unaExcursion cantidadPersonasExcursion: cantPersonasExcursion [
+
+	| unCliente |
+	unCliente := self buscarCliente: dniCliente.
+	[ unCliente isNotNil ] ifTrue: [ 
+		unCliente
+			buscarYAgregrarExcurision: nroContrato
+			excursion: unaExcursion
+			cantidadPersonasExcursion: cantPersonasExcursion ]
+]
+
+{ #category : #propios }
 EmpresaTurismo >> buscarCliente: dniCliente [
 
 	| unCliente |

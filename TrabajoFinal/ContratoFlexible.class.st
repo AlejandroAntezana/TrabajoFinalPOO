@@ -9,6 +9,15 @@ Class {
 	#category : #TrabajoFinal
 }
 
+{ #category : #propio }
+ContratoFlexible >> añadirExcursion: excursion cantidadPersonasExcursion: laCantidadPersonas [
+
+	[ laCantidadPersonas < disponibilidadExcursiones ] ifTrue: [ 
+		colExcursionesAdicionales add: excursion.
+		self disponibilidadExcursiones:
+			disponibilidadExcursiones - laCantidadPersonas ]
+]
+
 { #category : #accessing }
 ContratoFlexible >> colExcursionesAdicionales [
 

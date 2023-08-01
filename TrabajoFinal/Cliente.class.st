@@ -53,6 +53,16 @@ unContrato := colContratos detect: [ :contrato | contrato numeroContrato = nroCo
 ^unContrato .
 ]
 
+{ #category : #propios }
+Cliente >> buscarYAgregrarExcurision: nroContrato excursion: unaExcursion cantidadPersonasExcursion: cantPersonasExcursion [
+
+	| unContrato |
+	unContrato := self buscarContrato: nroContrato.
+
+	[ unContrato isNotNil ] ifTrue: [ 
+		unContrato añadirExcursion: unaExcursion  cantidadPersonasExcursion: cantPersonasExcursion ]
+]
+
 { #category : #accessing }
 Cliente >> ciudadResidencia [
 

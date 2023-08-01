@@ -26,6 +26,12 @@ Contrato class >> crear: numContrato viaje: unViaje fechaViaje: laFechaDelViaje 
 ]
 
 { #category : #propio }
+Contrato >> añadirExcursion: excursion cantidadPersonasExcursion: laCantidadPersonas [
+
+	^ SubclassResponsibility
+]
+
+{ #category : #propio }
 Contrato >> calcularDevolucion [
 
 	| monto montoActualAbonado fechaHoy |
