@@ -84,3 +84,14 @@ ViajeEspecial >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: v
 	fechaRegreso := fecha2.
 	disponibilidad := unEntero .
 ]
+
+{ #category : #printing }
+ViajeEspecial >> toString [
+
+	| cadena |
+	cadena := super toString.
+	cadena := cadena + ' fecha salida: ' + fechaSalida + ', ciudad: '
+	          + ciudad + ', cantidad de pasajeros disponible: '
+	          + disponibilidad + '.'.
+	^cadena.
+]

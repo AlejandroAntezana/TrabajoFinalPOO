@@ -50,8 +50,7 @@ ViajeOrganizado >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos:
 	valorImpuestos := valor2.
 	diasDuracionViaje := cantDias.
 	colEtapas := OrderedCollection new.
-	colFechasSalida := OrderedCollection new
-	
+	colFechasSalida := OrderedCollection new.
 ]
 
 { #category : #accessing }
@@ -67,4 +66,16 @@ ViajeOrganizado >> obtenerFechasDeSalida [
 			show: ', Entero: ';
 			show: entero printString;
 			cr ]
+]
+
+{ #category : #printing }
+ViajeOrganizado >> toString [
+
+	|cadena|
+	cadena := super toString.
+	
+	cadena := cadena + 'fechas de salida disponibles: ' +
+	
+	colFechasSalida.
+	
 ]

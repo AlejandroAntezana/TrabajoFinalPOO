@@ -57,6 +57,16 @@ Viaje >> nombre: nombreViaje [
 	nombre := nombreViaje.
 ]
 
+{ #category : #printing }
+Viaje >> toString [
+
+	| cadena |
+	cadena := 'nombre: ' + nombre + 'costo por persona: ' + costoPersona
+	          + 'valor impuestos: ' + valorImpuestos.
+	
+	^cadena.
+]
+
 { #category : #accessing }
 Viaje >> valorImpuestos [
 
