@@ -41,6 +41,12 @@ ViajeOrganizado >> actualizarCantPersonas: disponibilidadNecesaria FechaViaje: f
 	colFechasSalida do: [ :cadaTupla| (cadaTupla x = fechaViaje) ifTrue: [cadaTupla y: cadaTupla y +disponibilidadNecesaria ]]
 ]
 
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> agregarEtapa: laEtapa [
+
+	colEtapas add: laEtapa.
+]
+
 { #category : #accessing }
 ViajeOrganizado >> agregarFechaSalida: instanciaDate con: unEntero [
 

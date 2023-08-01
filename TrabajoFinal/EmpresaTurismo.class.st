@@ -16,6 +16,14 @@ nuevaEmpresa initialize.
 ^nuevaEmpresa .
 ]
 
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> agregarEtapa: elViaje laEtapa: laEtapa [
+
+	| unViaje |
+	unViaje := self buscarViaje: elViaje.
+	unViaje ifNotNil: [ unViaje agregarEtapa: laEtapa ]
+]
+
 { #category : #propios }
 EmpresaTurismo >> agregarExcursionAContrato: dniCliente numeroContrato: nroContrato excursion: unaExcursion cantidadPersonasExcursion: cantPersonasExcursion [
 
