@@ -56,6 +56,12 @@ Cliente >> ciudadResidencia: anObject [
 	ciudadResidencia := anObject
 ]
 
+{ #category : #propio }
+Cliente >> controlarVencimiento [
+
+	^ colContratos whileFalse: [:contrato | contrato esProximoAVencer]
+]
+
 { #category : #accessing }
 Cliente >> dni [
 

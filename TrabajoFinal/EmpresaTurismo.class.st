@@ -68,6 +68,15 @@ EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: elV
 					pagaPlus: abonaPlus ] ] ].
 ]
 
+{ #category : #'as yet unclassified' }
+EmpresaTurismo >> inicioDelDia [
+
+	| colClientesRecordatorio |
+	colClientesRecordatorio := OrderedCollection new.
+	colClientesRecordatorio := colClientes select: [ :cliente | 
+		                           cliente controlarVencimiento ]
+]
+
 { #category : #initialization }
 EmpresaTurismo >> initialize [ 
 	colClientes := OrderedCollection new.
