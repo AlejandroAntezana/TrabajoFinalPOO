@@ -16,6 +16,12 @@ nuevaEmpresa initialize.
 ^nuevaEmpresa .
 ]
 
+{ #category : #propios }
+EmpresaTurismo >> agregarCliente: unCliente [
+
+colClientes add: unCliente .
+]
+
 { #category : #'as yet unclassified' }
 EmpresaTurismo >> agregarEtapa: elViaje laEtapa: laEtapa [
 
@@ -34,6 +40,11 @@ EmpresaTurismo >> agregarExcursionAContrato: dniCliente numeroContrato: nroContr
 			buscarYAgregrarExcurision: nroContrato
 			excursion: unaExcursion
 			cantidadPersonasExcursion: cantPersonasExcursion ]
+]
+
+{ #category : #propios }
+EmpresaTurismo >> agregarViaje: unViaje [
+colViajes add: unViaje 
 ]
 
 { #category : #'as yet unclassified' }
