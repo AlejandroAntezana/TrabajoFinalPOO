@@ -64,18 +64,36 @@ ViajeOrganizado >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos:
 ]
 
 { #category : #accessing }
+ViajeOrganizado >> modificarDisponibilidad: disponibilidad FechaSalida: fechaViaje [
+
+| fechaParaModificar |
+	fechaParaModificar := colFechasSalida detect: [ :cadaFecha | 
+		                      cadaFecha fecha = fechaViaje ].
+	fechaParaModificar disponibilidad: disponibilidad.
+]
+
+{ #category : #accessing }
+ViajeOrganizado >> modificarFecha: fechaActual nuevaFecha: fechaNueva [
+
+|fechaParaModificar|
+
+fechaParaModificar := colFechasSalida detect: [ :cadaFecha | cadaFecha fecha = fechaActual ].
+fechaParaModificar fecha: fechaNueva.
+
+
+]
+
+{ #category : #accessing }
 ViajeOrganizado >> obtenerFechasDeSalida [
-"
-	| fecha entero |
-	colFechasSalida do: [ :dupla | 
-		fecha := dupla key.
-		entero := dupla value.
+	colFechasSalida do: [ :cadaFecha | 
 		Transcript
-			show: 'Fecha: ';
-			show: fecha printString;
-			show: ', Entero: ';
-			show: entero printString;
-			cr ]"
+			show: 'Fecha de Salida: ';
+			show: cadaFecha fecha printString;
+			show: ', Disponibilidad: ';
+			show: cadaFecha disponibilidad printString;
+			cr ]
+
+	
 ]
 
 { #category : #propios }

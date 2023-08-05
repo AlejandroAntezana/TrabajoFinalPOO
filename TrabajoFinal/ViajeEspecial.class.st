@@ -30,6 +30,11 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 ]
 
 { #category : #accessing }
+ViajeEspecial >> agregarExcursion: unaExcursion [
+ colExcursionesAdicionales add: unaExcursion .
+]
+
+{ #category : #accessing }
 ViajeEspecial >> ciudad [
 
 	^ ciudad
@@ -56,13 +61,13 @@ ViajeEspecial >> fechaRegreso: anObject [
 { #category : #accessing }
 ViajeEspecial >> fechaSalida [
 
-	^ fechaSalida
+	^ fechaSalida fecha
 ]
 
 { #category : #accessing }
-ViajeEspecial >> fechaSalida: anObject [
+ViajeEspecial >> fechaSalida: nuevaFechaSalida [
 
-	fechaSalida := anObject
+	fechaSalida fecha: nuevaFechaSalida.
 ]
 
 { #category : #initialization }
@@ -77,12 +82,29 @@ ViajeEspecial >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: v
 	fechaSalida := FechaSalida crear: unaFecha Disponibilidad: laDisponibilidad .
 ]
 
+{ #category : #accessing }
+ViajeEspecial >> modificarDisponibilidad: cupoNuevo [
+fechaSalida disponibilidad: cupoNuevo .
+]
+
+{ #category : #accessing }
+ViajeEspecial >> mostrarDisponibilidad [
+^ fechaSalida disponibilidad.
+]
+
 { #category : #printing }
 ViajeEspecial >> toString [
 
 	^ super toString , ' fecha salida: ' , fechaSalida fecha
 	  , ' ciudad: ' ciudad , ' cantidad de pasajeros disponible: '
 	  , fechaSalida disponibilidad , '.' 
+]
+
+{ #category : #accessing }
+ViajeEspecial >> verExcursionesAdicionales [
+	"No se si esta bien usar el printString asi"
+	colExcursionesAdicionales do: [ :cadaExcursion | 
+		cadaExcursion printString ]
 ]
 
 { #category : #propio }
