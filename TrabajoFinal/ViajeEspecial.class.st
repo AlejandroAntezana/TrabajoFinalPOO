@@ -5,7 +5,6 @@ Class {
 		'fechaSalida',
 		'ciudad',
 		'fechaRegreso',
-		'disponibilidad',
 		'colExcursionesAdicionales'
 	],
 	#category : #TrabajoFinal
@@ -72,11 +71,8 @@ ViajeEspecial >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantP
 ]
 
 { #category : #propio }
-ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 fecha2: fecha2 [
+ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 CantPersonas: laCantPersonas [
 
-	| rta |
-	rta := fecha1 <= fechaSalida and fechaSalida
-	       <= fecha2 and disponibilidad >= 1.
-
-	^ rta.
+	^ (fecha1 <= fechaSalida fecha and: fechaSalida fecha <= fecha2) 
+		  and: fechaSalida disponibilidad  >= laCantPersonas
 ]

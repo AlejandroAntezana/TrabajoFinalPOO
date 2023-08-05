@@ -138,14 +138,14 @@ ViajeOrganizado >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCan
 ]
 
 { #category : #propios }
-ViajeOrganizado >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
+ViajeOrganizado >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 CantPersonas: laCantPersonas [
 
-	| rta |
-	rta := false.
-	rta := colFechasSalida anySatisfy: [ :tupla | 
-		       tupla x <= fecha1 and: tupla x <= fecha2 and y >= 1 ].
-
-	^ rta
+	^ [ 
+	  colFechasSalida detect: [ :fechaSalida | 
+		  fechaSalida
+			  verificarDisponibilidadEntreFecha1: fecha1
+			  Fecha2: fecha2
+			  CantPersonas: laCantPersonas ] ] ifNil: false ifNotNil: true
 ]
 
 { #category : #propios }

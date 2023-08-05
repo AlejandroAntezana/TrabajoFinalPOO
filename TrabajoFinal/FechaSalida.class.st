@@ -1,5 +1,5 @@
 Class {
-	#name : #FechaViaje,
+	#name : #FechaSalida,
 	#superclass : #Object,
 	#instVars : [
 		'fecha',
@@ -9,37 +9,39 @@ Class {
 }
 
 { #category : #accessing }
-FechaViaje >> disponibilidad [
+FechaSalida >> disponibilidad [
 
 	^ disponibilidad
 ]
 
 { #category : #accessing }
-FechaViaje >> disponibilidad: anObject [
+FechaSalida >> disponibilidad: anObject [
 
 	disponibilidad := anObject
 ]
 
 { #category : #accessing }
-FechaViaje >> fecha [
+FechaSalida >> fecha [
 
 	^ fecha
 ]
 
 { #category : #accessing }
-FechaViaje >> fecha: anObject [
+FechaSalida >> fecha: anObject [
 
 	fecha := anObject
 ]
 
 { #category : #'as yet unclassified' }
-FechaViaje >> verificarDisponibilidad: laCantPersonas Fecha: laFechaViaje [
+FechaSalida >> verificarDisponibilidadFecha:laFechaViaje CantPersonas: laCantPersonas [
 
 	^ disponibilidad >= laCantPersonas and: fecha = laFechaViaje
 ]
 
 { #category : #'as yet unclassified' }
-FechaViaje >> verificarDisponibilidadFecha:laFechaViaje CantPersonas: laCantPersonas [
+FechaSalida >> verificarDisponibilidadFechaEntre: laFecha1 Fecha2: laFecha2 CantPersonas: laCantPersonas [
 
-	^ disponibilidad >= laCantPersonas and: fecha = laFechaViaje
+	^ ((disponibilidad >= laCantPersonas
+		  and: fecha >= laFecha1)
+		  and: fecha <= laFecha2)
 ]
