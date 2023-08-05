@@ -114,12 +114,13 @@ ViajeOrganizado >> toString [
 ViajeOrganizado >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
 
 	"Devuelve la primar instancia que da verdadero a verificiarDisponibilidadFecha: CantPersonas, si devuelve nul devolvemos falso y sino true"
-
-	^ [ 
-	  colFechasSalida detect: [ :fechaSalida | 
-		  fechaSalida
-			  verificarDisponibilidadFecha: laFechaViaje
-			  CantPersonas: laCantPersonas ] ] ifNil: false ifNotNil: true
+	|fechaBuscada disponible|
+	disponible := false.
+	fechaBuscada := colFechasSalida detect: [ :fechaSalida | fechaSalida fecha = laFechaViaje ] .
+	fechaBuscada ifNotNil: [ (fechaBuscada disponibilidad >= laCantPersonas) ifTrue: [ disponible := true ] ].
+	^ disponible
+			  
+	
 ]
 
 { #category : #propios }

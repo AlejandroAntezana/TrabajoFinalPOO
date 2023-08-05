@@ -137,13 +137,13 @@ EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: nom
 	| unViaje unCliente |
 	unViaje := self buscarViaje: nombreViaje.
 
-	[ unViaje isNotNil ] ifTrue: [ 
-		[ 
-		unViaje
+	unViaje ifNotNil: [ 
+		
+		(unViaje
 			verificarDisponibilidad: laFechaViaje
-			cantidadPersonas: laCantPersonas ] ifTrue: [ 
+			cantidadPersonas: laCantPersonas ) ifTrue: [ 
 			unCliente := self buscarCliente: dniCliente.
-			[ unCliente isNotNil ] ifTrue: [ 
+			unCliente ifNotNil: [ 
 				unCliente
 					generarContrato: numContrato
 					viaje: unViaje
