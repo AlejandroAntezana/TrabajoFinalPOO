@@ -32,20 +32,8 @@ Contrato >> añadirExcursion: excursion cantidadPersonasExcursion: laCantidadPer
 
 { #category : #propio }
 Contrato >> calcularDevolucion [
-"
-	| monto montoActualAbonado fechaHoy |
-	monto := 0.
-	montoActualAbonado := costoTotal / cantCuotas * cantCuotasPagadas.
-	fechaHoy := Date today.
 
-	[ fechaHoy <= fechaViaje - 90 ] ifTrue: [ 
-		monto := montoActualAbonado * 0.75 ].
-	[ fechaHoy >= fechaViaje - 90 and: fechaHoy <= fechaViaje - 60 ] 
-		ifTrue: [ monto := montoActualAbonado * 0.5 ].
-	[ fechaHoy >= fechaViaje - 60 ] ifTrue: [ 
-		monto := montoActualAbonado * 0.25 ].
-
-	^ monto"
+	^ cuotas obtenerMontoDevolucion: costoTotal
 ]
 
 { #category : #accessing }
@@ -100,9 +88,7 @@ Contrato >> efectivizarContrato [
 
 	| fechaHoy |
 	fechaHoy := Date today.
-	"[ cantCuotas = cantCuotasPagadas and: fechaHoy >= fechaViaje ] 
-		ifTrue: [ contratoEfectivizado := true ].
-	^ contratoEfectivizado"
+	^ cuotas verificarEfectivizacion:fechaViaje
 ]
 
 { #category : #propio }

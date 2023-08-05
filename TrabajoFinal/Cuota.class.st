@@ -76,3 +76,23 @@ cantCuotasPagadas := 0.
 fechaProximoVencimiento :=  Date today + 30 .
 costoCuota := elCostoTotal / cantCuotas
 ]
+
+{ #category : #propios }
+Cuota >> obtenerMontoDevolucion: costoTotal fechaViaje: laFechaViaje [
+
+|monto montoActualAbonado fechaHoy|
+monto := 0.
+montoActualAbonado := (costoTotal / cantCuotas ) * cantCuotasPagadas .
+[fechaHoy <= laFechaViaje - 90]
+]
+
+{ #category : #propios }
+Cuota >> verificarEfectivizacion: laFechaViaje [
+
+|contratoEfectivizado fechaHoy|
+fechaHoy := Date today.
+[ cantCuotas = cantCuotasPagadas and: laFechaViaje <= fechaHoy ] ifTrue: [contratoEfectivizado := true] .
+^contratoEfectivizado 
+
+
+]
