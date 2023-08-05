@@ -202,12 +202,9 @@ Contrato >> toString [
 { #category : #propio }
 Contrato >> verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: elNumContrato [
 
-	| rta |
-	rta := elNumContrato = numeroContrato.
-	(rta and: Date today <= fechaViaje - 7) ifTrue: [ 
+	(elNumContrato = numeroContrato and: Date today <= fechaViaje - 7) ifTrue: [ 
 		self debitarYActualizarCuotas: laCantCuotas ].
-	
-	^rta.
+
 ]
 
 { #category : #printing }
