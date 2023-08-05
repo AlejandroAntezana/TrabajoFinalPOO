@@ -111,3 +111,20 @@ Viaje >> verificarDisponibilidadYActualizarPersonas: fechaViaje disponibilidadNe
 
 	^ cantPersonasModificada
 ]
+
+{ #category : #propio }
+Viaje >> verificarDisponibilidadYActualizarfechaViaje:fechaViaje nuevaFecha: nuevaFecha  cantidadPersonas: cantPersonas [
+^ SubclassResponsibility .
+]
+
+{ #category : #propio }
+Viaje >> verificarYAgregarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	^ SubclassResponsibility 
+]
+
+{ #category : #propio }
+Viaje >> verificarYQuitarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+^SubclassResponsibility 
+	
+]

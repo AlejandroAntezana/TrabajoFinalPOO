@@ -8,6 +8,17 @@ Class {
 	#category : #TrabajoFinal
 }
 
+{ #category : #creation }
+FechaSalida class >> crear: unaFecha Disponibilidad: laDisponibilidad [
+
+	| nuevaFechaSalida |
+	nuevaFechaSalida := self new.
+	nuevaFechaSalida
+		inicializar: unaFecha
+		Disponibilidad: laDisponibilidad.
+	^ nuevaFechaSalida
+]
+
 { #category : #accessing }
 FechaSalida >> disponibilidad [
 
@@ -32,16 +43,43 @@ FechaSalida >> fecha: anObject [
 	fecha := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+FechaSalida >> inicializar: unaFecha Disponibilidad: laDisponibilidad [
+fecha := unaFecha .
+disponibilidad := laDisponibilidad .
+
+	
+]
+
+{ #category : #propios }
 FechaSalida >> verificarDisponibilidadFecha:laFechaViaje CantPersonas: laCantPersonas [
 
 	^ disponibilidad >= laCantPersonas and: fecha = laFechaViaje
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 FechaSalida >> verificarDisponibilidadFechaEntre: laFecha1 Fecha2: laFecha2 CantPersonas: laCantPersonas [
 
 	^ ((disponibilidad >= laCantPersonas
 		  and: fecha >= laFecha1)
 		  and: fecha <= laFecha2)
+]
+
+{ #category : #propios }
+FechaSalida >> verificarYAgregar: fechaViaje cantidadPersonas: unaCantidad [
+|realizado|
+realizado := false.
+[ fechaViaje = fecha and: disponibilidad >= unaCantidad ] ifTrue: [ self disponibilidad: disponibilidad - unaCantidad. realizado := true].
+^ realizado.
+]
+
+{ #category : #propios }
+FechaSalida >> verificarYQuitar: fechaViaje cantidadPersonas: unaCantidad [
+
+	| realizado |
+	realizado := false.
+	[ fechaViaje = fecha ] ifTrue: [ 
+		self disponibilidad: disponibilidad + unaCantidad.
+		realizado := true ].
+	^ realizado
 ]

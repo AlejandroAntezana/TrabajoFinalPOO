@@ -25,6 +25,15 @@ Contrato class >> crear: numContrato viaje: unViaje fechaViaje: laFechaDelViaje 
 ]
 
 { #category : #propio }
+Contrato >> agregarPersonasAContrato: unaCantidad [
+
+	[ viaje verificarYAgregarPersonas: fechaViaje cantidadPersonas: unaCantidad ] ifTrue: [ 
+		self cantPersonas: cantPersonas + unaCantidad.
+		self costoTotal:
+			cantPersonas * viaje costoPersona + viaje valorImpuestos ]
+]
+
+{ #category : #propio }
 Contrato >> añadirExcursion: excursion cantidadPersonasExcursion: laCantidadPersonas [
 
 	^ SubclassResponsibility
@@ -136,22 +145,6 @@ Contrato >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje can
 	colExcursionesContratadas  := OrderedCollection new.
 ]
 
-{ #category : #propio }
-Contrato >> modificarPersonasContrato: laCantPersonas [
-
-	| disponibilidadNecesaria |
-	disponibilidadNecesaria := laCantPersonas - cantPersonas.
-
-	[ 
-	viaje
-		verificarDisponibilidadYActualizarPersonas: fechaViaje
-		disponibilidadNecesaria: disponibilidadNecesaria
-		cantidadPersonas: laCantPersonas ] ifTrue: [ 
-		viaje costoTotal: viaje obtenerCostoPorPersona * laCantPersonas
-			+ viaje obtenerValorImpuestos.
-		self cantPersonas: laCantPersonas ]
-]
-
 { #category : #accessing }
 Contrato >> numeroContrato [
 
@@ -171,6 +164,18 @@ Contrato >> obtenerNombreExcursiones [
 	nombresExcursiones := ''.
 	^ colExcursionesContratadas do: [ :cadaExcursion | 
 		  nombresExcursiones := nombresExcursiones , cadaExcursion nombre ]
+]
+
+{ #category : #propio }
+Contrato >> quitarPersonasAContrato: unaCantidad [
+
+	[ 
+	viaje
+		verificarYQuitarPersonas: fechaViaje
+		cantidadPersonas: unaCantidad ] ifTrue: [ 
+		self cantPersonas: cantPersonas + unaCantidad.
+		self costoTotal:
+			cantPersonas * viaje costoPersona + viaje valorImpuestos ]
 ]
 
 { #category : #printing }

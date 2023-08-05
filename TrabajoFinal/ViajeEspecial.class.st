@@ -17,15 +17,21 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 	nuevoViaje := self new.
 
 	nuevoViaje
-		inicializarViajeEspecial: nombreViaje
+		inicializar: nombreViaje
 		costoPersona: valor1
 		valorImpuestos: valor2
-		fechaSalida: fecha1
 		ciudad: ciudadDestino
 		fechaRegreso: fecha2
+		fechaSalida: fecha1
 		disponibilidad: unEntero.
 
+
 	^ nuevoViaje
+]
+
+{ #category : #accessing }
+ViajeEspecial >> agregarExcursion: unaExcursion [
+ colExcursionesAdicionales add: unaExcursion .
 ]
 
 { #category : #accessing }
@@ -55,13 +61,35 @@ ViajeEspecial >> fechaRegreso: anObject [
 { #category : #accessing }
 ViajeEspecial >> fechaSalida [
 
-	^ fechaSalida
+	^ fechaSalida fecha
 ]
 
 { #category : #accessing }
-ViajeEspecial >> fechaSalida: anObject [
+ViajeEspecial >> fechaSalida: nuevaFechaSalida [
 
-	fechaSalida := anObject
+	fechaSalida fecha: nuevaFechaSalida.
+]
+
+{ #category : #initialization }
+ViajeEspecial >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2 ciudad: nombreCiudad fechaRegreso: laFechaRegreso fechaSalida: unaFecha disponibilidad: laDisponibilidad [
+
+	nombre := nombreViaje.
+	costoPersona := valor1.
+	valorImpuestos := valor2.
+	ciudad := nombreCiudad.
+	fechaRegreso := laFechaRegreso.
+	colExcursionesAdicionales := OrderedCollection new.
+	fechaSalida := FechaSalida crear: unaFecha Disponibilidad: laDisponibilidad .
+]
+
+{ #category : #accessing }
+ViajeEspecial >> modificarDisponibilidad: cupoNuevo [
+fechaSalida disponibilidad: cupoNuevo .
+]
+
+{ #category : #accessing }
+ViajeEspecial >> mostrarDisponibilidad [
+^ fechaSalida disponibilidad.
 ]
 
 { #category : #printing }
@@ -70,6 +98,13 @@ ViajeEspecial >> toString [
 	^ super toString , ' fecha salida: ' , fechaSalida fecha
 	  , ' ciudad: ' ciudad , ' cantidad de pasajeros disponible: '
 	  , fechaSalida disponibilidad , '.' 
+]
+
+{ #category : #accessing }
+ViajeEspecial >> verExcursionesAdicionales [
+	"No se si esta bien usar el printString asi"
+	colExcursionesAdicionales do: [ :cadaExcursion | 
+		cadaExcursion printString ]
 ]
 
 { #category : #propio }
@@ -95,4 +130,16 @@ ViajeEspecial >> verificarExcursionYAñadir: nombreExcursion CantPersonasExcursi
 			 CantPersonasExcursion: laCantPersonasExcursion) isNotNil ].
 
 
+]
+
+{ #category : #propio }
+ViajeEspecial >> verificarYAgregarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	^ fechaSalida verificarYAgregar: fechaViaje cantidadPersonas: unaCantidad.
+]
+
+{ #category : #propio }
+ViajeEspecial >> verificarYQuitarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	 ^ fechaSalida verificarYQuitar: fechaViaje cantidadPersonas: unaCantidad.
 ]

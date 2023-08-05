@@ -22,37 +22,21 @@ ViajeOrganizado class >> crear: nombreViaje costoPersona: valor1 valorImpuestos:
 	^ nuevoViajeOrganizado
 ]
 
-{ #category : #creation }
-ViajeOrganizado class >> crearViajeOrganizado: nombreViaje costoPersona: valor1 valorImpuestos: valor2 diasDuracionViaje: cantDias [
-
-	| nuevoViajeOrganizado |
-	nuevoViajeOrganizado := self new.
-	nuevoViajeOrganizado
-		inicializar: nombreViaje
-		costoPersona: valor1
-		valorImpuestos: valor2
-		diasDuracionViaje: cantDias.
-		
-	^ nuevoViajeOrganizado
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 ViajeOrganizado >> actualizarCantPersonas: disponibilidadNecesaria FechaViaje: fechaViaje [
 	colFechasSalida do: [ :cadaTupla| (cadaTupla x = fechaViaje) ifTrue: [cadaTupla y: cadaTupla y +disponibilidadNecesaria ]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 ViajeOrganizado >> agregarEtapa: laEtapa [
 
 	colEtapas add: laEtapa.
 ]
 
 { #category : #accessing }
-ViajeOrganizado >> agregarFechaSalida: instanciaDate con: unEntero [
+ViajeOrganizado >> agregarFechaSalida: instanciaDate con: disponibilidad [
 
-	| dupla |
-	dupla := instanciaDate -> unEntero. "Crea una dupla con la fecha y el entero"
-	colFechasSalida add: dupla
+colFechasSalida add: (FechaSalida crear: instanciaDate Disponibilidad: disponibilidad).
 ]
 
 { #category : #accessing }
@@ -78,33 +62,40 @@ ViajeOrganizado >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos:
 	colFechasSalida := OrderedCollection new.
 ]
 
-{ #category : #initialization }
-ViajeOrganizado >> inicializarViajeOrganizado: nombreViaje costoPersona: valor1 valorImpuestos: valor2 diasDuracionViaje: cantDias [
+{ #category : #accessing }
+ViajeOrganizado >> modificarDisponibilidad: disponibilidad FechaSalida: fechaViaje [
 
-	nombre := nombreViaje.
-	costoPersona := valor1.
-	valorImpuestos := valor2.
-	diasDuracionViaje := cantDias.
-	colEtapas := OrderedCollection new.
-	colFechasSalida := OrderedCollection new
+| fechaParaModificar |
+	fechaParaModificar := colFechasSalida detect: [ :cadaFecha | 
+		                      cadaFecha fecha = fechaViaje ].
+	fechaParaModificar disponibilidad: disponibilidad.
+]
+
+{ #category : #accessing }
+ViajeOrganizado >> modificarFecha: fechaActual nuevaFecha: fechaNueva [
+
+|fechaParaModificar|
+
+fechaParaModificar := colFechasSalida detect: [ :cadaFecha | cadaFecha fecha = fechaActual ].
+fechaParaModificar fecha: fechaNueva.
+
+
 ]
 
 { #category : #accessing }
 ViajeOrganizado >> obtenerFechasDeSalida [
-
-	| fecha entero |
-	colFechasSalida do: [ :dupla | 
-		fecha := dupla key.
-		entero := dupla value.
+	colFechasSalida do: [ :cadaFecha | 
 		Transcript
-			show: 'Fecha: ';
-			show: fecha printString;
-			show: ', Entero: ';
-			show: entero printString;
+			show: 'Fecha de Salida: ';
+			show: cadaFecha fecha printString;
+			show: ', Disponibilidad: ';
+			show: cadaFecha disponibilidad printString;
 			cr ]
+
+	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 ViajeOrganizado >> quitarEtapa: laEtapa [
 	
 	colEtapas remove: laEtapa.
@@ -165,8 +156,47 @@ ViajeOrganizado >> verificarDisponibilidadYActualizar: fechaViaje fechaNueva: nu
 					cadaTupla y: cadaTupla y + cantPersonas ] ] ] ]
 ]
 
+{ #category : #propio }
+ViajeOrganizado >> verificarDisponibilidadYActualizarfechaViaje: fechaViaje nuevaFecha: nuevaFecha cantidadPersonas: cantPersonas [
+
+	| modificar |
+	modificar := false.
+	colFechasSalida do: [ :fechaSalida | 
+		[ fechaSalida fecha = fechaViaje ] ifTrue: [ 
+			fechaSalida disponibilidad:
+				fechaSalida disponibilidad + cantPersonas.
+			modificar := true ] ].
+	modificar ifTrue: [ 
+		colFechasSalida do: [ :fechaSalida | 
+			[ fechaSalida fecha = nuevaFecha ] ifTrue: [ 
+				fechaSalida disponibilidad:
+					fechaSalida disponibilidad - cantPersonas ] ] ]
+]
+
 { #category : #'as yet unclassified' }
 ViajeOrganizado >> verificarExcursionYAñadir: nombreExcursion CantPersonasExcursion: laCantPersonasExcursion [
 
 	^colEtapas detect: [ :cadaEtapa | cadaEtapa verificarExcursionEtapa: nombreExcursion  CantPersonas: laCantPersonasExcursion isNotNil   ]
+]
+
+{ #category : #propio }
+ViajeOrganizado >> verificarYAgregarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+|realizado|
+realizado := false.
+colFechasSalida do: [ :cadaFecha | [cadaFecha verificarYAgregar: fechaViaje cantidadPersonas: unaCantidad] ifTrue: [ realizado := true ] ].
+^ realizado .
+]
+
+{ #category : #propio }
+ViajeOrganizado >> verificarYQuitarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	| realizado |
+	realizado := false.
+	colFechasSalida do: [ :cadaFecha | 
+		[ 
+		cadaFecha
+			verificarYQuitar: fechaViaje
+			cantidadPersonas: unaCantidad ] ifTrue: [ realizado := true ] ].
+	^ realizado
 ]
