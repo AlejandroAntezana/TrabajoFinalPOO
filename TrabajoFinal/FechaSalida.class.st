@@ -45,3 +45,22 @@ FechaSalida >> verificarDisponibilidadFechaEntre: laFecha1 Fecha2: laFecha2 Cant
 		  and: fecha >= laFecha1)
 		  and: fecha <= laFecha2)
 ]
+
+{ #category : #propios }
+FechaSalida >> verificarYAgregar: fechaViaje cantidadPersonas: unaCantidad [
+|realizado|
+realizado := false.
+[ fechaViaje = fecha and: disponibilidad >= unaCantidad ] ifTrue: [ self disponibilidad: disponibilidad - unaCantidad. realizado := true].
+^ realizado.
+]
+
+{ #category : #propios }
+FechaSalida >> verificarYQuitar: fechaViaje cantidadPersonas: unaCantidad [
+
+	| realizado |
+	realizado := false.
+	[ fechaViaje = fecha ] ifTrue: [ 
+		self disponibilidad: disponibilidad + unaCantidad.
+		realizado := true ].
+	^ realizado
+]

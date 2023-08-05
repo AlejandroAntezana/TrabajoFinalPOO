@@ -80,10 +80,20 @@ costoCuota := elCostoTotal / cantCuotas
 { #category : #propios }
 Cuota >> obtenerMontoDevolucion: costoTotal fechaViaje: laFechaViaje [
 
-|monto montoActualAbonado fechaHoy|
-monto := 0.
-montoActualAbonado := (costoTotal / cantCuotas ) * cantCuotasPagadas .
-[fechaHoy <= laFechaViaje - 90]
+	| monto montoActualAbonado fechaHoy |
+	monto := 0.
+	fechaHoy := Date today.
+	montoActualAbonado := costoTotal / cantCuotas * cantCuotasPagadas.
+	[ fechaHoy <= laFechaViaje - 90 ] ifTrue: [ 
+		monto := montoActualAbonado * 0.75 ].
+
+	[ fechaHoy >= laFechaViaje - 90 and: fechaHoy <= laFechaViaje - 60 ] 
+		ifTrue: [ monto := montoActualAbonado * 0.5 ].
+
+	[ fechaHoy >= laFechaViaje - 60 ] ifTrue: [ 
+		monto := montoActualAbonado * 0.25 ].
+
+	^ monto
 ]
 
 { #category : #propios }

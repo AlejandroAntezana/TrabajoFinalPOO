@@ -37,12 +37,12 @@ ViajeOrganizado class >> crearViajeOrganizado: nombreViaje costoPersona: valor1 
 	^ nuevoViajeOrganizado
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 ViajeOrganizado >> actualizarCantPersonas: disponibilidadNecesaria FechaViaje: fechaViaje [
 	colFechasSalida do: [ :cadaTupla| (cadaTupla x = fechaViaje) ifTrue: [cadaTupla y: cadaTupla y +disponibilidadNecesaria ]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 ViajeOrganizado >> agregarEtapa: laEtapa [
 
 	colEtapas add: laEtapa.
@@ -105,7 +105,7 @@ ViajeOrganizado >> obtenerFechasDeSalida [
 			cr ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #propios }
 ViajeOrganizado >> quitarEtapa: laEtapa [
 	
 	colEtapas remove: laEtapa.
@@ -164,4 +164,43 @@ ViajeOrganizado >> verificarDisponibilidadYActualizar: fechaViaje fechaNueva: nu
 				cadaTupla x = fechaViaje ifTrue: [ 
 					fechaAnteriorEncontrada := true.
 					cadaTupla y: cadaTupla y + cantPersonas ] ] ] ]
+]
+
+{ #category : #propio }
+ViajeOrganizado >> verificarDisponibilidadYActualizarfechaViaje: fechaViaje nuevaFecha: nuevaFecha cantidadPersonas: cantPersonas [
+
+	| modificar |
+	modificar := false.
+	colFechasSalida do: [ :fechaSalida | 
+		[ fechaSalida fecha = fechaViaje ] ifTrue: [ 
+			fechaSalida disponibilidad:
+				fechaSalida disponibilidad + cantPersonas.
+			modificar := true ] ].
+	modificar ifTrue: [ 
+		colFechasSalida do: [ :fechaSalida | 
+			[ fechaSalida fecha = nuevaFecha ] ifTrue: [ 
+				fechaSalida disponibilidad:
+					fechaSalida disponibilidad - cantPersonas ] ] ]
+]
+
+{ #category : #propio }
+ViajeOrganizado >> verificarYAgregarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+|realizado|
+realizado := false.
+colFechasSalida do: [ :cadaFecha | [cadaFecha verificarYAgregar: fechaViaje cantidadPersonas: unaCantidad] ifTrue: [ realizado := true ] ].
+^ realizado .
+]
+
+{ #category : #propio }
+ViajeOrganizado >> verificarYQuitarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	| realizado |
+	realizado := false.
+	colFechasSalida do: [ :cadaFecha | 
+		[ 
+		cadaFecha
+			verificarYQuitar: fechaViaje
+			cantidadPersonas: unaCantidad ] ifTrue: [ realizado := true ] ].
+	^ realizado
 ]

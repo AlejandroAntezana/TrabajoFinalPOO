@@ -84,3 +84,15 @@ ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 CantP
 	^ (fecha1 <= fechaSalida fecha and: fechaSalida fecha <= fecha2) 
 		  and: fechaSalida disponibilidad  >= laCantPersonas
 ]
+
+{ #category : #propio }
+ViajeEspecial >> verificarYAgregarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	^ fechaSalida verificarYAgregar: fechaViaje cantidadPersonas: unaCantidad.
+]
+
+{ #category : #propio }
+ViajeEspecial >> verificarYQuitarPersonas: fechaViaje cantidadPersonas: unaCantidad [
+
+	 ^ fechaSalida verificarYQuitar: fechaViaje cantidadPersonas: unaCantidad.
+]
