@@ -3,20 +3,10 @@ Class {
 	#superclass : #Contrato,
 	#instVars : [
 		'valorPlus',
-		'disponibilidadExcursiones',
 		'colExcursionesAdicionales'
 	],
 	#category : #TrabajoFinal
 }
-
-{ #category : #propio }
-ContratoFlexible >> añadirExcursion: excursion cantidadPersonasExcursion: laCantidadPersonas [
-
-	[ laCantidadPersonas < disponibilidadExcursiones ] ifTrue: [ 
-		colExcursionesAdicionales add: excursion.
-		self disponibilidadExcursiones:
-			disponibilidadExcursiones - laCantidadPersonas ]
-]
 
 { #category : #accessing }
 ContratoFlexible >> colExcursionesAdicionales [
@@ -30,18 +20,6 @@ ContratoFlexible >> colExcursionesAdicionales: unaDupla [
 	colExcursionesAdicionales add: unaDupla 
 ]
 
-{ #category : #accessing }
-ContratoFlexible >> disponibilidadExcursiones [
-
-	^ disponibilidadExcursiones
-]
-
-{ #category : #accessing }
-ContratoFlexible >> disponibilidadExcursiones: anObject [
-
-	disponibilidadExcursiones := anObject
-]
-
 { #category : #initialization }
 ContratoFlexible >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje cantPersonas: laCantPersonas cantCuotas: laCantCuotas [
 
@@ -50,9 +28,8 @@ ContratoFlexible >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaV
 		viaje: unViaje
 		fechaViaje: laFechaViaje
 		cantPersonas: laCantPersonas
-		cantCuotas: laCantCuotas .
-		valorPlus := costoTotal * 0.15.
-		disponibilidadExcursiones := cantPersonas - 1.
+		cantCuotas: laCantCuotas.
+	valorPlus := costoTotal * 0.15.
 	
 ]
 
@@ -67,9 +44,8 @@ ContratoFlexible >> toString [
 	| cadena |
 	cadena := super toString.
 	cadena := cadena , 'Valor del Plus:' + valorPlus
-	          + 'Disponibilidad para Excursiones:'
-	          + disponibilidadExcursiones + 'Excursiones Contratadas:'
-	          + colExcursionesAdicionales 
+	           + 'Excursiones Contratadas:'
+	          + colExcursionesAdicionales
 ]
 
 { #category : #accessing }

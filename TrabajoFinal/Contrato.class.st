@@ -9,9 +9,8 @@ Class {
 		'viaje',
 		'fechaViaje',
 		'cantPersonas',
-		'cantCuotas',
-		'cantCuotasPagadas',
-		'fechaProximoVencimiento'
+		'cuotas',
+		'colExcursionesContratadas'
 	],
 	#category : #TrabajoFinal
 }
@@ -33,7 +32,7 @@ Contrato >> añadirExcursion: excursion cantidadPersonasExcursion: laCantidadPer
 
 { #category : #propio }
 Contrato >> calcularDevolucion [
-
+"
 	| monto montoActualAbonado fechaHoy |
 	monto := 0.
 	montoActualAbonado := costoTotal / cantCuotas * cantCuotasPagadas.
@@ -46,31 +45,7 @@ Contrato >> calcularDevolucion [
 	[ fechaHoy >= fechaViaje - 60 ] ifTrue: [ 
 		monto := montoActualAbonado * 0.25 ].
 
-	^ monto
-]
-
-{ #category : #accessing }
-Contrato >> cantCuotas [
-
-	^ cantCuotas
-]
-
-{ #category : #accessing }
-Contrato >> cantCuotas: anObject [
-
-	cantCuotas := anObject
-]
-
-{ #category : #accessing }
-Contrato >> cantCuotasPagadas [
-
-	^ cantCuotasPagadas
-]
-
-{ #category : #accessing }
-Contrato >> cantCuotasPagadas: anObject [
-
-	cantCuotasPagadas := anObject
+	^ monto"
 ]
 
 { #category : #accessing }
@@ -112,8 +87,11 @@ Contrato >> costoTotal: anObject [
 { #category : #propio }
 Contrato >> debitarYActualizarCuotas: laCantCuotas [
 
-	(cantCuotasPagadas < cantCuotas) ifTrue:[ cantCuotasPagadas:= cantCuotasPagadas + laCantCuotas. 
-		(cantCuotasPagadas < cantCuotas) ifTrue: [ fechaProximoVencimiento := fechaProximoVencimiento + 30*laCantCuotas ]].
+	"cantCuotasPagadas < cantCuotas ifTrue: [ 
+		cantCuotasPagadas := cantCuotasPagadas + laCantCuotas.
+		cantCuotasPagadas < cantCuotas ifTrue: [ 
+			fechaProximoVencimiento := fechaProximoVencimiento + 30
+			                           * laCantCuotas ] ]"
 ]
 
 { #category : #propio }
@@ -121,18 +99,16 @@ Contrato >> efectivizarContrato [
 
 	| fechaHoy |
 	fechaHoy := Date today.
-	[ cantCuotas = cantCuotasPagadas and: fechaHoy >= fechaViaje ] 
+	"[ cantCuotas = cantCuotasPagadas and: fechaHoy >= fechaViaje ] 
 		ifTrue: [ contratoEfectivizado := true ].
-	^ contratoEfectivizado
+	^ contratoEfectivizado"
 ]
 
 { #category : #propio }
 Contrato >> esProximoAVencer [
 
-	| rta |
-	rta := false.
-	contratoEfectivizado ifFalse: [rta := Date today >= (fechaViaje-21) and: Date today <= (fechaViaje -7 )].
-	^rta.
+	^ Date today >= (fechaViaje - 21) and:
+			       Date today <= (fechaViaje - 7)
 ]
 
 { #category : #accessing }
@@ -145,18 +121,6 @@ Contrato >> fechaContrato [
 Contrato >> fechaContrato: anObject [
 
 	fechaContrato := anObject
-]
-
-{ #category : #accessing }
-Contrato >> fechaProximoVencimiento [
-
-	^ fechaProximoVencimiento
-]
-
-{ #category : #accessing }
-Contrato >> fechaProximoVencimiento: anObject [
-
-	fechaProximoVencimiento := anObject
 ]
 
 { #category : #accessing }
@@ -177,12 +141,12 @@ Contrato >> inicializar: nroContrato viaje: unViaje fechaViaje: laFechaViaje can
 	viaje := unViaje.
 	fechaViaje := laFechaViaje.
 	cantPersonas := laCantPersonas.
-	cantCuotas := laCantCuotas.
-	cantCuotasPagadas := 0.
 	numeroContrato := nroContrato.
 	fechaContrato := Date today.
-	fechaProximoVencimiento := Date today + 30.
-	costoTotal := (unViaje obtenerCostoPorPersona) * laCantPersonas + (unViaje obtenerValorImpuestos)
+	costoTotal := unViaje obtenerCostoPorPersona * laCantPersonas
+	              + unViaje obtenerValorImpuestos.
+	cuotas := Cuota crear: laCantCuotas CostoTotal: costoTotal.
+	colExcursionesContratadas  := OrderedCollection new.
 ]
 
 { #category : #propio }
@@ -216,14 +180,12 @@ Contrato >> numeroContrato: anObject [
 { #category : #printing }
 Contrato >> toString [
 
-	^ 'Numero de Contrato:' , numeroContrato ,
-'Fecha de Contrato:' , fechaContrato , 
-'Costo Total:' , costoTotal , 
-'Fecha del Viaje:' , fechaViaje ,
-'Cantidad de Personas:' , cantPersonas ,
-'Cantidad de Cuotas: ' , cantCuotas , 
-'Cantidad de Cuotas Pagadas:' , cantCuotasPagadas , 
-'Fecha del proximo vencimiento:' , fechaProximoVencimiento 
+	^ 'Numero de Contrato:' , numeroContrato , 'Fecha de Contrato:'
+	  , fechaContrato , 'Costo Total:' , costoTotal , 'Fecha del Viaje:'
+	  , fechaViaje , 'Cantidad de Personas:' , cantPersonas
+	  ", 'Cantidad de Cuotas: ' , cantCuotas
+	  , 'Cantidad de Cuotas Pagadas:' , cantCuotasPagadas
+	  , 'Fecha del proximo vencimiento:' , fechaProximoVencimiento"
 ]
 
 { #category : #propio }

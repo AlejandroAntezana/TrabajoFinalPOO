@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'nombre',
 		'costoPersona',
-		'valorImpuestos',
-		'viajeDisponible'
+		'valorImpuestos'
 	],
 	#category : #TrabajoFinal
 }
@@ -43,7 +42,7 @@ Viaje >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2 [
 	nombre := nombreViaje.
 	costoPersona := valor1.
 	valorImpuestos := valor2.
-	viajeDisponible := true. 
+	
 ]
 
 { #category : #accessing }
@@ -88,12 +87,6 @@ Viaje >> valorImpuestos: unValor [
 ]
 
 { #category : #propio }
-Viaje >> verificarAltaDeViaje [
-
-	^viajeDisponible = true.
-]
-
-{ #category : #propio }
 Viaje >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
 
 	^ SubclassResponsibility
@@ -119,16 +112,4 @@ Viaje >> verificarDisponibilidadYActualizarPersonas: fechaViaje disponibilidadNe
 			cantPersonasModificada := true ] ].
 
 	^ cantPersonasModificada
-]
-
-{ #category : #accessing }
-Viaje >> viajeDisponible [
-
-	^ viajeDisponible
-]
-
-{ #category : #accessing }
-Viaje >> viajeDisponible: anObject [
-
-	viajeDisponible := anObject
 ]

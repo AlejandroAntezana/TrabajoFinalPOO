@@ -5,7 +5,8 @@ Class {
 		'fechaSalida',
 		'ciudad',
 		'fechaRegreso',
-		'disponibilidad'
+		'disponibilidad',
+		'colExcursionesAdicionales'
 	],
 	#category : #TrabajoFinal
 }
@@ -28,17 +29,6 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 	^ nuevoViaje
 ]
 
-{ #category : #propio }
-ViajeEspecial >> actualizarCantPersonas: disponibilidadNecesaria [
-
-	self disponibilidad: disponibilidad + disponibilidadNecesaria
-]
-
-{ #category : #'as yet unclassified' }
-ViajeEspecial >> cambiarViajeANoDisponible [
-	(Date today >= fechaSalida) ifTrue: [ viajeDisponible := false].
-]
-
 { #category : #accessing }
 ViajeEspecial >> ciudad [
 
@@ -49,18 +39,6 @@ ViajeEspecial >> ciudad [
 ViajeEspecial >> ciudad: anObject [
 
 	ciudad := anObject
-]
-
-{ #category : #accessing }
-ViajeEspecial >> disponibilidad [
-
-	^ disponibilidad
-]
-
-{ #category : #accessing }
-ViajeEspecial >> disponibilidad: anObject [
-
-	disponibilidad := anObject
 ]
 
 { #category : #accessing }
@@ -87,36 +65,10 @@ ViajeEspecial >> fechaSalida: anObject [
 	fechaSalida := anObject
 ]
 
-{ #category : #initialization }
-ViajeEspecial >> inicializarViajeEspecial: nombreViaje costoPersona: valor1 valorImpuestos: valor2 fechaSalida: fecha1 ciudad: ciudadDestino fechaRegreso: fecha2 disponibilidad: unEntero [
-
-	self
-		inicializar: nombreViaje
-		costoPersona: valor1
-		valorImpuestos: valor2.
-
-	fechaSalida := fecha1.
-	ciudad := ciudadDestino.
-	fechaRegreso := fecha2.
-	disponibilidad := unEntero
-]
-
-{ #category : #printing }
-ViajeEspecial >> toString [
-
-	| cadena |
-	cadena := super toString.
-	cadena := cadena , ciudad , fechaSalida toString
-	          , fechaRegreso toString , disponibilidad toString.
-	^ cadena
-]
-
 { #category : #propio }
 ViajeEspecial >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
 
-	^ [ self fechaSalida = laFechaViaje ] and: [ 
-		  self disponibilidad >= laCantPersonas and:
-			  self viajeDisponible ]
+	^ fechaSalida verificarDisponibilidadFecha: laFechaViaje  CantPersonas: laCantPersonas
 ]
 
 { #category : #propio }

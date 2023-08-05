@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'colEtapas',
 		'colFechasSalida',
-		'diasDuracionViaje'
+		'diasDuracionViaje',
+		'colExcursionesAdicionales'
 	],
 	#category : #TrabajoFinal
 }
@@ -53,12 +54,6 @@ ViajeOrganizado >> agregarFechaSalida: instanciaDate con: unEntero [
 	| dupla |
 	dupla := instanciaDate -> unEntero. "Crea una dupla con la fecha y el entero"
 	colFechasSalida add: dupla
-]
-
-{ #category : #'as yet unclassified' }
-ViajeOrganizado >> cambiarViajeANoDisponible [
-
-	colFechasSalida lastPosition: [ :cadaTupla | cadaTupla x <= Date today ifTrue: [viajeDisponible := false]]
 ]
 
 { #category : #accessing }
@@ -130,16 +125,16 @@ ViajeOrganizado >> toString [
 	          , 'dias de duracion del viaje: ' , diasDuracionViaje
 ]
 
-{ #category : #propios }
+{ #category : #propio }
 ViajeOrganizado >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
 
-	| rta |
-	rta := false.
-	[ viajeDisponible ] ifTrue: [ 
-		rta := colFechasSalida detect: [ :cadaTupla | 
-			       cadaTupla x = laFechaViaje and:
-				       cadaTupla y >= laCantPersonas ] ].
-	^ rta
+	"Devuelve la primar instancia que da verdadero a verificiarDisponibilidadFecha: CantPersonas, si devuelve nul devolvemos falso y sino true"
+
+	^ [ 
+	  colFechasSalida detect: [ :fechaSalida | 
+		  fechaSalida
+			  verificarDisponibilidadFecha: laFechaViaje
+			  CantPersonas: laCantPersonas ] ] ifNil: false ifNotNil: true
 ]
 
 { #category : #propios }
