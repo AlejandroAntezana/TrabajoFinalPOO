@@ -64,6 +64,14 @@ ViajeEspecial >> fechaSalida: anObject [
 	fechaSalida := anObject
 ]
 
+{ #category : #printing }
+ViajeEspecial >> toString [
+
+	^ super toString , ' fecha salida: ' , fechaSalida fecha
+	  , ' ciudad: ' ciudad , ' cantidad de pasajeros disponible: '
+	  , fechaSalida disponibilidad , '.' 
+]
+
 { #category : #propio }
 ViajeEspecial >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas [
 

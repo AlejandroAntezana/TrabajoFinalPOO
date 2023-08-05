@@ -87,6 +87,19 @@ EmpresaTurismo >> buscarViajesDisponiblesFecha1: fecha1 Fecha2: fecha2 [
 ]
 
 { #category : #propios }
+EmpresaTurismo >> buscarViajesDisponiblesFecha1: fecha1 Fecha2: fecha2 CantPersonas: laCantPersonas [
+
+	| viajes |
+	viajes := ''.
+	colViajes do: [ :cadaViaje | 
+		(cadaViaje
+			 infoViajeSiDisponibleFecha1: fecha1
+			 Fecha2: fecha2
+			 CantPersonas: laCantPersonas) ifTrue: [ 
+			viajes := viajes , ' - ' , cadaViaje toString ] ]
+]
+
+{ #category : #propios }
 EmpresaTurismo >> cancelarContrato: dniCliente numeroContrato: numContrato [
 
 |unCliente montoDevolucion|

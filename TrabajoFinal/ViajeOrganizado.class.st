@@ -114,15 +114,10 @@ ViajeOrganizado >> quitarEtapa: laEtapa [
 { #category : #printing }
 ViajeOrganizado >> toString [
 
-	| cadena |
-	cadena := super toString.
-
-	cadena := cadena , 'fechas de salida disponibles: '
-	          , [ colFechasSalida select: [ :tupla | tupla y >= 1 ] ] 
-		          do: [ :x | x ] toString.
-
-	cadena := cadena , 'cantidad de etapas: ' , colEtapas length
-	          , 'dias de duracion del viaje: ' , diasDuracionViaje
+	^ super toString , 'Fechas de salida disponibles: ' , colFechasSalida 
+		  do: [ :cadaFecha | 
+			  'fecha: ' ,cadaFecha fecha , ' disponibilidad :' , cadaFecha disponibilidad
+			  , ' - ' ] , '. Cantidad de etapas: ' , colEtapas length , '. Dias de duracion del viaje: ', diasDuracionViaje
 ]
 
 { #category : #propio }

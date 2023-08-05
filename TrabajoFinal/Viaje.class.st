@@ -30,9 +30,9 @@ Viaje >> costoPersona: unPrecio [
 ]
 
 { #category : #propio }
-Viaje >> infoViajeSiDisponibleFecha1: fecha1 Fecha2: fecha2 [
+Viaje >> infoViajeSiDisponibleFecha1: fecha1 Fecha2: fecha2 CantPersonas: laCantPersonas [
 
-	^ (self verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2) 
+	^ (self verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 CantPersonas: laCantPersonas ) 
 		  ifTrue: self toString
 ]
 
@@ -72,12 +72,10 @@ Viaje >> obtenerValorImpuestos [
 { #category : #printing }
 Viaje >> toString [
 
-	| cadena |
-	cadena := 'nombre: ' , nombre , 'costo por persona: '
+	^ 'nombre: ' , nombre , 'costo por persona: '
 	          , costoPersona toString , 'valor impuestos: '
 	          , valorImpuestos toString.
 
-	^ cadena
 ]
 
 { #category : #accessing }
@@ -93,9 +91,9 @@ Viaje >> verificarDisponibilidad: laFechaViaje cantidadPersonas: laCantPersonas 
 ]
 
 { #category : #propio }
-Viaje >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 [
+Viaje >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 CantPersonas: laCantPersonas [
 
-	^SubclassResponsibility 
+	^ SubclassResponsibility
 ]
 
 { #category : #propio }
