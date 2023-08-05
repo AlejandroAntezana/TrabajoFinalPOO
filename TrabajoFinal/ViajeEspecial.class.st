@@ -17,13 +17,14 @@ ViajeEspecial class >> crear: nombreViaje costoPersona: valor1 valorImpuestos: v
 	nuevoViaje := self new.
 
 	nuevoViaje
-		inicializarViajeEspecial: nombreViaje
+		inicializar: nombreViaje
 		costoPersona: valor1
 		valorImpuestos: valor2
-		fechaSalida: fecha1
 		ciudad: ciudadDestino
 		fechaRegreso: fecha2
+		fechaSalida: fecha1
 		disponibilidad: unEntero.
+
 
 	^ nuevoViaje
 ]
@@ -62,6 +63,18 @@ ViajeEspecial >> fechaSalida [
 ViajeEspecial >> fechaSalida: anObject [
 
 	fechaSalida := anObject
+]
+
+{ #category : #initialization }
+ViajeEspecial >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos: valor2 ciudad: nombreCiudad fechaRegreso: laFechaRegreso fechaSalida: unaFecha disponibilidad: laDisponibilidad [
+
+	nombre := nombreViaje.
+	costoPersona := valor1.
+	valorImpuestos := valor2.
+	ciudad := nombreCiudad.
+	fechaRegreso := laFechaRegreso.
+	colExcursionesAdicionales := OrderedCollection new.
+	fechaSalida := FechaSalida crear: unaFecha Disponibilidad: laDisponibilidad .
 ]
 
 { #category : #printing }

@@ -23,20 +23,6 @@ ViajeOrganizado class >> crear: nombreViaje costoPersona: valor1 valorImpuestos:
 	^ nuevoViajeOrganizado
 ]
 
-{ #category : #creation }
-ViajeOrganizado class >> crearViajeOrganizado: nombreViaje costoPersona: valor1 valorImpuestos: valor2 diasDuracionViaje: cantDias [
-
-	| nuevoViajeOrganizado |
-	nuevoViajeOrganizado := self new.
-	nuevoViajeOrganizado
-		inicializar: nombreViaje
-		costoPersona: valor1
-		valorImpuestos: valor2
-		diasDuracionViaje: cantDias.
-		
-	^ nuevoViajeOrganizado
-]
-
 { #category : #propios }
 ViajeOrganizado >> actualizarCantPersonas: disponibilidadNecesaria FechaViaje: fechaViaje [
 	colFechasSalida do: [ :cadaTupla| (cadaTupla x = fechaViaje) ifTrue: [cadaTupla y: cadaTupla y +disponibilidadNecesaria ]]
@@ -49,11 +35,9 @@ ViajeOrganizado >> agregarEtapa: laEtapa [
 ]
 
 { #category : #accessing }
-ViajeOrganizado >> agregarFechaSalida: instanciaDate con: unEntero [
+ViajeOrganizado >> agregarFechaSalida: instanciaDate con: disponibilidad [
 
-	| dupla |
-	dupla := instanciaDate -> unEntero. "Crea una dupla con la fecha y el entero"
-	colFechasSalida add: dupla
+colFechasSalida add: (FechaSalida crear: instanciaDate Disponibilidad: disponibilidad).
 ]
 
 { #category : #accessing }
@@ -79,20 +63,9 @@ ViajeOrganizado >> inicializar: nombreViaje costoPersona: valor1 valorImpuestos:
 	colFechasSalida := OrderedCollection new.
 ]
 
-{ #category : #initialization }
-ViajeOrganizado >> inicializarViajeOrganizado: nombreViaje costoPersona: valor1 valorImpuestos: valor2 diasDuracionViaje: cantDias [
-
-	nombre := nombreViaje.
-	costoPersona := valor1.
-	valorImpuestos := valor2.
-	diasDuracionViaje := cantDias.
-	colEtapas := OrderedCollection new.
-	colFechasSalida := OrderedCollection new
-]
-
 { #category : #accessing }
 ViajeOrganizado >> obtenerFechasDeSalida [
-
+"
 	| fecha entero |
 	colFechasSalida do: [ :dupla | 
 		fecha := dupla key.
@@ -102,7 +75,7 @@ ViajeOrganizado >> obtenerFechasDeSalida [
 			show: fecha printString;
 			show: ', Entero: ';
 			show: entero printString;
-			cr ]
+			cr ]"
 ]
 
 { #category : #propios }
