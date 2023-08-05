@@ -132,8 +132,8 @@ Cliente >> generarContrato: numContrato viaje: unViaje fechaViaje: laFechaViaje 
 				                 fechaViaje: laFechaViaje
 				                 cantPersonas: laCantPersonas
 				                 cantCuotas: laCantCuotas ].
-			
-		self añadirContrato: contratoNuevo.
+
+	self añadirContrato: contratoNuevo 
 ]
 
 { #category : #initialization }

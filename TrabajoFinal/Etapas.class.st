@@ -6,7 +6,8 @@ Class {
 		'diasDePermanencia',
 		'hotel',
 		'tipoPension',
-		'colActividades'
+		'colActividades',
+		'colExcursionesAdicionales'
 	],
 	#category : #TrabajoFinal
 }
@@ -92,4 +93,13 @@ Etapas >> tipoPension [
 Etapas >> tipoPension: anObject [
 
 	tipoPension := anObject
+]
+
+{ #category : #'as yet unclassified' }
+Etapas >> verificarExcursionEtapa: nombreExcursion CantPersonas: laCantPersonasExcursion [
+
+	^ colExcursionesAdicionales detect: [ :cadaExcursion | 
+		  (cadaExcursion
+			   verificarYActualizar: nombreExcursion
+			   CantPersonasExcursion: laCantPersonasExcursion) isNotNil ]
 ]

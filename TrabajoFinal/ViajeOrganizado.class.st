@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'colEtapas',
 		'colFechasSalida',
-		'diasDuracionViaje',
-		'colExcursionesAdicionales'
+		'diasDuracionViaje'
 	],
 	#category : #TrabajoFinal
 }
@@ -164,4 +163,10 @@ ViajeOrganizado >> verificarDisponibilidadYActualizar: fechaViaje fechaNueva: nu
 				cadaTupla x = fechaViaje ifTrue: [ 
 					fechaAnteriorEncontrada := true.
 					cadaTupla y: cadaTupla y + cantPersonas ] ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+ViajeOrganizado >> verificarExcursionYAñadir: nombreExcursion CantPersonasExcursion: laCantPersonasExcursion [
+
+	^colEtapas detect: [ :cadaEtapa | cadaEtapa verificarExcursionEtapa: nombreExcursion  CantPersonas: laCantPersonasExcursion isNotNil   ]
 ]

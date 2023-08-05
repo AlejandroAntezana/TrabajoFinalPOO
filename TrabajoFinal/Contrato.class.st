@@ -193,6 +193,13 @@ Contrato >> verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: elNumCo
 
 ]
 
+{ #category : #'as yet unclassified' }
+Contrato >> verificarYAñadirExcursionContrato: nombreExcursion CantPersonasExcursion: laCantPersonasExcursion [
+	|excursion|
+	excursion :=  viaje verificarExcursionYAñadir: nombreExcursion  CantPersonasExcursion: laCantPersonasExcursion.
+	 excursion ifNotNil:[ colExcursionesContratadas add: excursion].
+]
+
 { #category : #printing }
 Contrato >> verificarYObtenerInfo [
 

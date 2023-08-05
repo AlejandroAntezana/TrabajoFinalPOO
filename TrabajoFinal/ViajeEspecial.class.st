@@ -84,3 +84,15 @@ ViajeEspecial >> verificarDisponibilidadEntreFecha1: fecha1 Fecha2: fecha2 CantP
 	^ (fecha1 <= fechaSalida fecha and: fechaSalida fecha <= fecha2) 
 		  and: fechaSalida disponibilidad  >= laCantPersonas
 ]
+
+{ #category : #'as yet unclassified' }
+ViajeEspecial >> verificarExcursionYAñadir: nombreExcursion CantPersonasExcursion: laCantPersonasExcursion [
+
+
+	^ colExcursionesAdicionales detect: [ :cadaExcursion | 
+		(cadaExcursion
+			 verificarYActualizar: nombreExcursion
+			 CantPersonasExcursion: laCantPersonasExcursion) isNotNil ].
+
+
+]
