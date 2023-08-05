@@ -168,12 +168,14 @@ Cliente >> obtenerContratosSinEfectivizar [
 	"scope: class-variables  &  instance-variables"
 
 	| infoContrato |
-	colContratos do: [ 
-		[ :contrato | 
-		contrato verificarYObtenerInfo = '' ifFalse: [ 
-			infoContrato := infoContrato , contrato verificarYObtenerInfo ] ] ].
+	infoContrato := ''.
+	 colContratos do: [ 
+		                [ :contrato | 
+		                contrato verificarYObtenerInfo = '' ifFalse: [ 
+			                infoContrato := infoContrato
+			                                , contrato verificarYObtenerInfo ] ] ].
 
-^infoContrato.
+	^ infoContrato
 ]
 
 { #category : #accessing }
@@ -213,10 +215,11 @@ Cliente >> verContratosCliente [
 { #category : #propios }
 Cliente >> verificarContratoClienteYPagarLaCantCuotas: laCantCuotas NumeroContrato: elNumeroContrato [
 
-	^ colContratos whileFalse: [ :contrato | 
-		contrato
-			verificarContratoYPagarCantCuotas: laCantCuotas
-			NumContrato: elNumeroContrato ]
+	colContratos do: [ :cadaContrato | 
+		(cadaContrato
+			 verificarContratoYPagarCantCuotas: laCantCuotas
+			 NumContrato: elNumeroContrato)].
+	
 ]
 
 { #category : #propios }

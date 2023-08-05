@@ -87,11 +87,12 @@ Contrato >> costoTotal: anObject [
 { #category : #propio }
 Contrato >> debitarYActualizarCuotas: laCantCuotas [
 
-	"cantCuotasPagadas < cantCuotas ifTrue: [ 
-		cantCuotasPagadas := cantCuotasPagadas + laCantCuotas.
-		cantCuotasPagadas < cantCuotas ifTrue: [ 
-			fechaProximoVencimiento := fechaProximoVencimiento + 30
-			                           * laCantCuotas ] ]"
+	cuotas cantCuotasPagadas < cuotas cantCuotas ifTrue: [ 
+		cuotas cantCuotasPagadas: cuotas cantCuotasPagadas + laCantCuotas.
+		
+		cuotas cantCuotasPagadas < cuotas cantCuotas ifTrue: [ 
+			cuotas fechaProximoVencimiento:
+				cuotas fechaProximoVencimiento + 30 * laCantCuotas ] ]
 ]
 
 { #category : #propio }
@@ -178,14 +179,24 @@ Contrato >> numeroContrato: anObject [
 ]
 
 { #category : #printing }
+Contrato >> obtenerNombreExcursiones [
+
+	| nombresExcursiones |
+	nombresExcursiones := ''.
+	^ colExcursionesContratadas do: [ :cadaExcursion | 
+		  nombresExcursiones := nombresExcursiones , cadaExcursion nombre ]
+]
+
+{ #category : #printing }
 Contrato >> toString [
 
 	^ 'Numero de Contrato:' , numeroContrato , 'Fecha de Contrato:'
 	  , fechaContrato , 'Costo Total:' , costoTotal , 'Fecha del Viaje:'
 	  , fechaViaje , 'Cantidad de Personas:' , cantPersonas
-	  ", 'Cantidad de Cuotas: ' , cantCuotas
-	  , 'Cantidad de Cuotas Pagadas:' , cantCuotasPagadas
-	  , 'Fecha del proximo vencimiento:' , fechaProximoVencimiento"
+	  , 'Cantidad de Cuotas: ' , cuotas cantCuotas
+	  , 'Cantidad de Cuotas Pagadas:' , cuotas cantCuotasPagadas
+	  , 'Fecha del proximo vencimiento:' , cuotas fechaProximoVencimiento
+	, 'Excursiones contratadas: ' , self obtenerNombreExcursiones 
 ]
 
 { #category : #propio }

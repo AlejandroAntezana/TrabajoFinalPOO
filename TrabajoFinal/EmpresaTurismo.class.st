@@ -121,10 +121,10 @@ unCliente := self buscarCliente: elDniCliente.
 ]
 
 { #category : #propios }
-EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: elViaje cantidadPersonas: laCantPersonas cantidadCuotas: laCantCuotas fechaViaje: laFechaViaje pagaPlus: abonaPlus [
+EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: nombreViaje cantidadPersonas: laCantPersonas cantidadCuotas: laCantCuotas fechaViaje: laFechaViaje pagaPlus: abonaPlus [
 
 	| unViaje unCliente |
-	unViaje := self buscarViaje: elViaje.
+	unViaje := self buscarViaje: nombreViaje.
 
 	[ unViaje isNotNil ] ifTrue: [ 
 		[ 
@@ -135,11 +135,11 @@ EmpresaTurismo >> generarContratoCliente: numContrato dni: dniCliente Viaje: elV
 			[ unCliente isNotNil ] ifTrue: [ 
 				unCliente
 					generarContrato: numContrato
-					viaje: elViaje
+					viaje: unViaje
 					fechaViaje: laFechaViaje
 					cantidadPersonas: laCantPersonas
 					cantCuotas: laCantCuotas
-					pagaPlus: abonaPlus ] ] ].
+					pagaPlus: abonaPlus ] ] ]
 ]
 
 { #category : #propios }
@@ -214,8 +214,13 @@ EmpresaTurismo >> modificarNombreViaje: elViaje nuevoNombre: elNuevoNombre [
 ]
 
 { #category : #propios }
-EmpresaTurismo >> pagarCuotasContratoCantCuotas: laCantCuotas NumContrato:numContrato DniCliente: dniCliente [
-	(self buscarCliente: dniCliente) ifNotNil: [(self buscarCliente: dniCliente) verificarContratoYPagarCantCuotas: laCantCuotas NumContrato: numContrato].
+EmpresaTurismo >> pagarCuotasContratoCantCuotas: laCantCuotas NumContrato: numContrato DniCliente: dniCliente [
+	|cliente|
+	cliente := self buscarCliente: dniCliente.
+	cliente ifNotNil: [ 
+		cliente
+			verificarContratoYPagarCantCuotas: laCantCuotas
+			NumContrato: numContrato ]
 ]
 
 { #category : #'as yet unclassified' }
